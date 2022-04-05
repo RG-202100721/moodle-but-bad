@@ -68,16 +68,16 @@ INSERT INTO Turma (Nome, Ano, Nome_Responsavel, Email_Responsavel, Curso) VALUES
 ('Turma do 13º Ano', 13, 'Ludmila Feitosa', 'aegerter@pyhaihyrt.com', 'Automação e Computadores');
 
 INSERT INTO Aluno (Nome, Data_Nascimento, Genero, Email, URLFoto) VALUES
-('Garcez Milheiriço', str_to_date('2002.03.05', '%Y.%m.%d'), 'F', 'cusaum@eetieg.com', 'https://picsum.photos/500'),
-('Georgi Bogado', str_to_date('2001.04.10', '%Y.%m.%d'), 'M', 'kristian4811@filevino.com', 'https://picsum.photos/500'),
-('Simas Canejo', str_to_date('2001.06.23', '%Y.%m.%d'), 'F', 'nhwxchief@ibelnsep.com', 'https://picsum.photos/500'),
-('Romeu Parracho', str_to_date('2002.08.05', '%Y.%m.%d'), 'F', 'semilando@oanhxintv.com', 'https://picsum.photos/500'),
-('Quinaz Carvalheiro', str_to_date('2000.02.15', '%Y.%m.%d'), 'M', 'smahi@ebarg.net', 'https://picsum.photos/500'),
-('Naiara Moura', str_to_date('2001.05.18', '%Y.%m.%d'), 'M', 'chrisbieniek@capitalistdilemma.com', 'https://picsum.photos/500'),
-('Temes Caetano', str_to_date('2001.03.11', '%Y.%m.%d'), 'M', 'gzoo55@ccvisal.xyz', 'https://picsum.photos/500'),
-('Tom Paz', str_to_date('2000.09.23', '%Y.%m.%d'), 'F', 'markowael@tchoeo.com', 'https://picsum.photos/500'),
-('Joyce Veloso', str_to_date('2002.11.03', '%Y.%m.%d'), 'F', 'lsykes@tchoeo.com', 'https://picsum.photos/500'),
-('Cloe Boeira', str_to_date('1999.01.21', '%Y.%m.%d'), 'M', 'kinnik4@oanhxintv.com', 'https://picsum.photos/500');
+('Garcez Milheiriço', str_to_date('2002.03.05', '%Y.%m.%d'), 'F', 'cusaum@eetieg.com', 'https://picsum.photos/seed/1/500'),
+('Georgi Bogado', str_to_date('2001.04.10', '%Y.%m.%d'), 'M', 'kristian4811@filevino.com', 'https://picsum.photos/seed/2/500'),
+('Simas Canejo', str_to_date('2001.06.23', '%Y.%m.%d'), 'F', 'nhwxchief@ibelnsep.com', 'https://picsum.photos/seed/3/500'),
+('Romeu Parracho', str_to_date('2002.08.05', '%Y.%m.%d'), 'F', 'semilando@oanhxintv.com', 'https://picsum.photos/seed/4/500'),
+('Quinaz Carvalheiro', str_to_date('2000.02.15', '%Y.%m.%d'), 'M', 'smahi@ebarg.net', 'https://picsum.photos/seed/5/500'),
+('Naiara Moura', str_to_date('2001.05.18', '%Y.%m.%d'), 'M', 'chrisbieniek@capitalistdilemma.com', 'https://picsum.photos/seed/6/500'),
+('Temes Caetano', str_to_date('2001.03.11', '%Y.%m.%d'), 'M', 'gzoo55@ccvisal.xyz', 'https://picsum.photos/seed/7/500'),
+('Tom Paz', str_to_date('2000.09.23', '%Y.%m.%d'), 'F', 'markowael@tchoeo.com', 'https://picsum.photos/seed/8/500'),
+('Joyce Veloso', str_to_date('2002.11.03', '%Y.%m.%d'), 'F', 'lsykes@tchoeo.com', 'https://picsum.photos/seed/9/500'),
+('Cloe Boeira', str_to_date('1999.01.21', '%Y.%m.%d'), 'M', 'kinnik4@oanhxintv.com', 'https://picsum.photos/seed/10/500');
 
 INSERT INTO Disciplina (Nome, Docente) VALUES
 ('Matemática', 'Adelaide Faustino'), 
