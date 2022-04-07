@@ -1,10 +1,11 @@
-var http = require("http");
-var url = require("url");
-var path = require("path");
-var fs = require("fs");
-var options = {
+const path = require("path");
+const express = require('express');
+const bodyParser = require("body-parser");
+const router = express.Router();
+const app = express();
+const options = {
     "default": {
-        "folder": "./www",
+        "folder": "/www/",
         "document": "index.html",
         "port": 1017,
         "favicon": "images/cursor.ico"
@@ -22,23 +23,13 @@ var options = {
         "ico": "image/x-icon"
     }
 };
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
 
 //cria e carrega a base de dados com informção
-var dbcon = require('./scripts/connection');
+const dbcon = require('./scripts/connection');
 dbcon.start();
 dbcon.create();
-dbcon.end();
-
-
-function router(request) {
-    var pathname = request.url;
-    switch (pathname) {
-        case "/": pathname += options.default.document; break;
-        case "/favicon.ico": pathname = options.default.favicon; break;
-        default: break;
-    }
-    return pathname ? path.join(__dirname, options.default.folder, pathname) : null;
-}
 
 function mimeType(filename) {
     var extension = path.extname(filename);
@@ -46,21 +37,71 @@ function mimeType(filename) {
     return options.extensions[extension];
 }
 
-//criação do servidor http
-http.createServer(function (request, response) {
-    console.log(`Request for ${request.url} received.`);
-    var filename = router(request);
-    if (filename) {
-        fs.readFile(filename, function (err, data) {
-            if (err) {
-                console.log(err);
-                response.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
-                response.write("HTTP Status: 404 : NOT FOUND");
-            } else {
-                response.writeHead(200, { "Content-Type": mimeType(filename) });
-                response.write(data);
-            }
-            response.end();
-        });
+//processamento dos pedidos de ficheiros
+router.get('/STOP', (req, res) => { 
+    server.emit("STOP");
+});
+router.get('/', (req, res) => { 
+    res.sendFile(path.join(__dirname + options.default.folder + options.default.document));
+});
+router.get('/favicon.ico', (req, res) => { 
+    res.sendFile(path.join(__dirname + options.default.folder + options.default.favicon)); 
+});
+router.get('/sweetalert2.js', (req, res) => { 
+    res.sendFile(path.join(__dirname + "/node_modules/sweetalert2/dist/sweetalert2.js")); 
+});
+router.get('/sweetalert2/dark.css', (req, res) => { 
+    res.sendFile(path.join(__dirname + "/node_modules/@sweetalert2/theme-dark/dark.css")); 
+});
+
+//processamento dos pedidos CRUD
+router.get('/getAll*', (req, res) => {
+    var sql = "SELECT * FROM " + req.url.replace("/getAll", "");
+    dbcon.query(sql, function(err, result) {
+   		if (err) throw err;
+   		if (result) res.send(result);
+        else res.send("0 results.");
+	});
+});
+router.post('/create', (req, res) => {
+    var id = 0;
+    var sql = "SELECT COUNT(ID) AS id FROM " + req.body["Tabela"];
+    dbcon.query(sql, function(err, result) {
+        if (err) throw err;
+        if (result) id = result[0].id + 1; 
+        else res.send("0 results.");
+    });
+
+    var sql = "INSERT INTO " + req.body["Tabela"];
+    switch (req.body["Tabela"]) {
+        case "Aluno":
+            sql += " (Nome, Data_Nascimento, Genero, Email, URLFoto) VALUES " +
+                    `('${req.body["Nome"]}', str_to_date('${req.body["Data_Nascimento"]}', '%Y-%m-%d'), '${req.body["Genero"]}', '${req.body["Email"]}', '${req.body["URLFoto"]}');`;
+            break;
+        case "Disciplina":
+            sql += " (Nome, Docente) VALUES " +
+                    `('${req.body["Nome"]}', '${req.body["Docente"]}');`;
+            break;
     }
-}).listen(options.default.port);
+    dbcon.query(sql, function(err, result) {
+   		if (err) {
+            res.send("0 results.");
+            throw err;
+        }
+   		else res.send(JSON.stringify(id));
+	});
+});
+
+
+//criação do servidor http
+app.set("Content-Type", mimeType(path.join(__dirname + options.default.folder + options.default.document)));
+app.use(express.static('www'), router);
+const server = app.listen(options.default.port, () => { 
+    console.log(`Listening on port ${options.default.port}`);
+    myApp = process.title;
+});
+server.on('STOP', () => {
+    dbcon.end();
+    console.log("Closing server...");
+    server.close();
+});
