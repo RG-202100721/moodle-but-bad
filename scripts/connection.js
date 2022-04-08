@@ -1,7 +1,7 @@
 var fs = require("fs");
 var mysql = require('mysql');
 
-var type = "local";
+var type = "notlocal";
 if (type == "local") {
     var con = mysql.createConnection({
         //credenciais do servidor mysql
