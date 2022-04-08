@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS Inscricao (
 
 DROP TABLE IF EXISTS Revisao;
 CREATE TABLE IF NOT EXISTS Revisao (
-  Dia_Revisao int, 
+  Dia_Revisao date,  
   IDDisciplina int NOT NULL, 
   IDAluno int NOT NULL,
   Nota_Antes decimal(10,2),
@@ -99,8 +99,8 @@ INSERT INTO Inscricao (IDDisciplina, IDAluno, Nota) VALUES
 (5, 10, 19.01);
 
 INSERT INTO Revisao (Dia_Revisao, IDDisciplina, IDAluno, Nota_Antes, Nota_Depois, Efetivada, Fechada) VALUES
-(21, 2, 3, 6.91, 11.56, 'S', 'N'),
-(11, 5, 7, 8.89, 16.26, 'N', 'N'),
-(16, 3, 5, 2.08, 10.08, 'S', 'S'),
-(27, 4, 10, 5.50, 14.85, 'S', 'N'),
-(7, 1, 9, 10.87, 12.04, 'S', 'S');
+(str_to_date('2035.03.21', '%Y.%m.%d'), 2, 3, 6.91, 11.56, 'S', 'N'),
+(str_to_date('2022.05.11', '%Y.%m.%d'), 5, 7, 8.89, 16.26, 'N', 'N'),
+(str_to_date('2022.11.16', '%Y.%m.%d'), 3, 5, 2.08, 10.08, 'S', 'S'),
+(str_to_date('2008.08.27', '%Y.%m.%d'), 4, 10, 5.50, 14.85, 'S', 'N'),
+(str_to_date('2014.12.07', '%Y.%m.%d'), 1, 9, 10.87, 12.04, 'S', 'S');
