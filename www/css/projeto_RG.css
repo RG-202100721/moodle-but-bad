@@ -1,0 +1,577 @@
+@charset "utf-8";
+
+/* Estilos Globais */
+html
+{
+	scroll-behavior: smooth;
+}
+body
+{
+	background-color: #212529;
+    font-family: "Times New Roman";
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 10px;
+}
+section, footer
+{
+	background-color: #262A2F;
+	margin-left: auto;
+	margin-right: auto;
+	width: 92%;
+	max-width: 1100px;
+	padding-left: 2.275%;
+	padding-right: 2.275%;
+	display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    align-content: center;
+}
+aside
+{
+	text-align: center;
+}
+form
+{
+	font-size: 15px;
+	font-weight: 400;
+	color: #FFFFFF;
+}
+table, tr, td, th
+{
+	color: #FFFFFF;
+	border: 2px solid #333940;
+}
+table
+{
+	width: 100%;
+}
+td img
+{
+	cursor: pointer;
+	width: 75px;
+	height: 75px;
+}
+
+/* Barra de Navegação (Cabeçalho) */
+header
+{
+	display: block;
+	top: 0px;
+	left: 0px;
+	background-color: #212529;
+	height: 104px;
+	width: 100%;
+	border-top: 2px solid #333940;
+    border-bottom: 2px solid #333940;
+}
+.barraNav, .paginaPessoal
+{
+	display: flex;
+	flex-wrap: wrap;
+    flex-direction: row;
+	align-items: center;
+    justify-content: center;
+    width: 100%;
+	height: 96%;
+	transition: ease 800ms;
+}
+.barraNav a, .paginaPessoal a
+{
+	margin: 0px 40px;
+	font-size: 20px;
+	text-decoration: none;
+	color: #0088CC;
+}
+.barraNav a.ativo
+{
+	color: #FFFFFF;
+}
+.barraNav a:hover, .paginaPessoal a:hover
+{
+	transition: ease 500ms;
+    color: #FFFFFF;
+}
+.logoNav
+{
+	width: 140px;
+	height: 102px;
+	padding-top: 1px;
+}
+.barraNavEntrar
+{
+	display: none;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	color: #0088CC;
+	background-color: #212529;
+	font-size: 51.84px;
+	cursor: pointer;
+	width: 100%;
+	max-height: 102px;
+	text-align: right;
+	padding-top: 15px;
+	padding-right: 19.44px;
+}
+.barraNavEntrar:hover
+{
+	transition: ease 800ms;
+	color: #FFFFFF;
+}
+.barraNavSair, .botaoReset
+{
+	display: none;
+	color: #0088CC;
+	font-size: 50px;
+	cursor: pointer;
+}
+.barraNavSair:hover, .botaoReset:hover
+{
+	transition: ease 500ms;
+	color: #FFFFFF;
+}
+
+/* Contéudo Principal e Secções*/
+.botaoReset
+{
+	display: block;
+	margin-top: 2.275%;
+    margin-bottom: -8%;
+}
+/*
+.logoSec
+{
+	margin-top: 15px;
+	width: 92%;
+	max-width: 833px;
+	object-fit: contain;
+	align-self: center;
+}*/
+.conteudo
+{
+	text-align: left;
+}
+.conteudo h1, th, h5
+{
+	font-size: 30px;
+	font-weight: 400;
+	line-height: 30px;
+	color: #0088CC;
+	margin: 0px;
+}
+.conteudo h2
+{
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 18px;
+	color: #FFFFFF;
+	margin: 0px;
+	margin-bottom: 17px;
+}
+.conteudo p
+{
+	font-size: 15px;
+	font-weight: 400;
+	padding-bottom: 16px;
+	margin: 0px;
+	color: #777777;
+}
+.conteudo p.msgErro
+{
+	color: #D10000;
+	font-size: 30px;
+	font-weight: 400;
+	margin: 0px;
+	padding: 0px;
+}
+.botoes, aside, .produto
+{
+	display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+aside
+{
+	flex-direction: column;
+}
+.botoes input
+{
+	padding-left: 75px;
+	padding-right: 75px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: #0088CC;
+	background-color: #212529;
+	border: 2px #FFFFFF;
+	border-style: revert;
+	margin: 0px 70px 15px 70px;
+}
+.botoes input:hover
+{
+	color: #FFFFFF;
+	background-color: #262A2F;
+	cursor: pointer;
+	border-color: #0088CC;
+}
+.texto, #addprod.texto
+{
+	margin-bottom: 10px;
+	color: #FFFFFF;
+	background-color: #212529;
+	border: 2px solid #333940;
+	text-align: center;
+}
+textarea
+{
+	margin: 0px 0px 10px;
+	resize: none;
+}
+::placeholder
+{
+	color: #777777;
+	font-family: "Times New Roman";
+	font-size: 14px;
+}
+.produto
+{
+	margin-bottom: 60px;
+	width: 100%;
+}
+.produto:last-of-type
+{
+	margin-bottom: 17px;
+}
+.produto .imagem, #carrinho td img
+{
+	min-width: 250px;
+	width: 250px;
+    margin-right: 25px;
+}
+.produto .descricao
+{
+	width: 45%;
+}
+.produto .descPre
+{
+	color: #FFFFFF;
+}
+.produto .descPre span
+{
+	color: #0088CC;
+	display: block;
+	font-weight: bold;
+}
+.produto .shop
+{
+	display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+	width: 250px;
+	margin-left: 25px;
+}
+.produto .shop img
+{
+	width: 45px;
+	height: 45px;
+}
+.produto .shop span
+{
+	color: #0088CC;
+	font-size: 45px;
+	text-align: center;
+}
+.produto .shop:hover
+{
+	cursor: pointer;
+}
+#carrinho table, #carrinho th, #carrinho tr, #carrinho td
+{
+	border-style: dashed;
+}
+#carrinho td img
+{
+	cursor: default;
+	margin: 0px;
+	height: 100%;
+}
+#carrinho table p, #carrinho table th
+{
+	color: #0088CC;
+}
+#carrinho table p, #carrinho table th, #carrinho table h2
+{
+	padding: 0px;
+	margin: 0px;
+}
+#carrinho .quantidade
+{
+	font-size: 75px;
+}
+#carrinho .preco
+{
+	font-size: 30px;
+}
+#addprod .texto
+{
+	margin: 0px;
+	width: 900px;
+}
+.labelIma
+{
+	padding: 3px 8px;
+	cursor: pointer;
+	color: #0088CC;
+	border: solid 2px #FFFFFF;
+	background-color: #262A2F;
+}
+.display
+{
+	width: 90%;
+	max-width: max-content;
+}
+.paginaPessoal
+{
+	padding-top: 14px;
+}
+
+/* Rodapé */
+.footerLink
+{
+	list-style: none;
+	font-size: 15px;
+	color: #0088CC;
+	padding: 0px;
+	align-self: center;
+}
+.footerLink li
+{
+	float: left;
+	padding-left: 4px;
+	padding-right: 4px;
+	margin-left: 4px;
+}
+.footerLink li a
+{
+	color: #0088CC;
+	text-decoration: none;
+}
+.footerLink li a.ativo
+{
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+.footerLink li a:hover
+{
+	transition: ease 500ms;
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+.perfil
+{
+	color: #FFFFFF;
+	align-self: center;
+	font-size: 18px;
+	margin: 15px 0px;
+}
+.perfil span
+{
+	color: #0088CC;
+}
+.nota
+{
+	font-size: 14px;
+	color: #FFFFFF;
+	font-weight: 700;
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: 25px;
+}
+.nota span 
+{
+	color: #777777;
+	font-weight: 400;
+}
+
+/* Regras CSS para ecrãs entre 601 a 1024 px (tablets) */
+@media only screen and (min-width : 601px) and (max-width : 1024px) 
+{
+	td img
+	{
+		width: 50px;
+		height: 50px;
+	}
+	th
+	{
+		font-size: 25px;
+	}
+	
+	/* Barra de Navegação */
+	.barraNav a 
+	{
+    	margin: 0px 20px;
+	}
+	
+	/* Contéudo Principal e Secções*/
+	.botaoReset
+	{
+    	margin-bottom: -10%;
+	}
+	.botao
+	{
+		margin: 0px 30px 15px 30px;
+	}
+	.produto
+	{
+		margin-bottom: 40px;
+	}
+	.produto .imagem, #carrinho td img
+	{
+		min-width: 190px;
+		width: 190px;
+	}
+	.produto .descricao
+	{
+		width: 30%;
+	}
+	.produto .shop
+	{
+		width: 175px;
+	}
+	#carrinho .quantidade
+	{
+		font-size: 50px;
+	}
+	#carrinho .preco
+	{
+		font-size: 20px;
+	}
+	#addprod .texto
+	{
+		width: 500px;
+	}
+}
+	
+/* Regras CSS para ecrãs entre 0 a 600 px (telemóveis/smartphones) */
+@media only screen and (min-width : 0px) and (max-width : 600px) 
+{
+	td img
+	{
+		width: 25px;
+		height: 25px;
+	}
+	th
+	{
+		font-size: 18px;
+	}
+	
+	/* Barra de Navegação */
+	.barraNav
+	{
+		display: block;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		width: 0%;
+		height: 100%;
+		background-color: #000000;
+		overflow: hidden;
+		padding: 0px;
+		opacity: 0.9;
+	}
+	.barraNav a:first-of-type 
+	{
+    	margin-top: calc(50vh - 220px);
+	}
+	.barraNav a
+	{
+		display: block;
+		text-align: center;
+		font-size: 25px;
+		font-weight: bold;
+		margin: 48px;
+	}
+	.logoNav
+	{
+		height: 150px;
+		width: 100%;
+		object-fit: contain;
+		margin: 0px;
+	}
+	.barraNavEntrar
+	{
+		display: block;
+	}
+	.barraNavSair
+	{
+		display: block;
+		float: right;
+		padding-right: 15px;
+	}
+	
+	/* Contéudo Principal e Secções*/
+	.botaoReset
+	{
+    	margin-bottom: -13%;
+	}
+	.logoSec
+	{
+		margin-bottom: 15px;
+	}
+	.botoes
+	{
+		flex-wrap: wrap;
+	}
+	.produto
+	{
+		display: flex;
+    	flex-direction: column;
+		margin-bottom: 100px;
+	}
+	.produto:last-of-type
+	{
+		margin-bottom: 100px;
+	}
+	.produto .imagem
+	{
+		min-width: 0px;
+    	width: 250px;
+		margin-right: 0px;
+		margin-bottom: 20px;
+	}
+	.produto .descricao
+	{
+		width: 80%;
+	}
+	
+	.produto .shop
+	{
+		justify-content: space-between;
+		margin-left: 0px;
+	}
+	#carrinho td img
+	{
+		width: 100px;
+		min-width: 0px;
+	}
+	#carrinho table h2, #carrinho .preco
+	{
+		font-size: 15px;
+	}
+	#carrinho .quantidade
+	{
+		font-size: 40px;
+	}
+	#addprod .texto
+	{
+		width: auto;
+	}
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Moodle but bad</title>
+		<link rel="icon" type="image/icon" href="images/cursor.ico">
+		<link rel="stylesheet" type="text/css" href="css/projeto_RG.css">
+		<link rel="stylesheet" type="text/css" href="sweetalert2/dark.css">
+		<script type="text/javascript" src="sweetalert2.js"></script>
+		<script type="text/javascript" src="js/projeto_RG.js"></script>
+		<script type="text/javascript" src="js/CRUD_RG.js"></script>
+		<script type="text/javascript" src="js/barra_RG.js"></script>
+		<script type="text/javascript" src="js/index_RG.js"></script>
+	</head>
+	<body>
+		<header>
+			<span class="barraNavEntrar">☰</span>
+			<nav class="barraNav">
+				<span class="barraNavSair">x</span>
+				<a href="index.html" class="ativo">Início</a>
+				<a href="produtos.html">Produtos</a>
+				<a href="carrinho.html">Carrinho</a>
+				<a href="sobre.html">Sobre</a>
+			</nav>
+		</header>
+		<section class="conteudo">
+			<span class="botaoReset" onclick="reset()">&#10227;</span>
+			<h1>Área do Cliente</h1>
+			<h2>Utilize este espaço para se registar ou para entrar na sua conta.</h2>
+			<br>
+			<aside>
+				<p class="msgErro" id="err"></p>
+				<div id="info" style="display: none;"></div>
+				<div class="botoes">
+					<input id="regi" name="regi" type="button" onClick="show('registar')" value="Registar" />
+					<input id="logi" name="logi" type="button" onClick="show('login')" value="Entrar" />
+				</div>
+			</aside>
+			<button id="b1" type="button">Create</button>
+			<table id="test"></table>
+		</section>
+		<footer>
+			<ul class="footerLink">
+				<li><a href="index.html" class="ativo">Início</a></li>
+				<li>|</li>
+				<li><a href="produtos.html">Produtos</a></li>
+				<li>|</li>
+				<li><a href="carrinho.html">Carrinho</a></li>
+				<li>|</li>
+				<li><a href="sobre.html">Sobre</a></li>
+			</ul>
+			<p class="nota">© Copyright 2022 Websites do Rafa. <span>Todos os direitos são reservados.</span></p>
+		</footer>
+	</body>
+</html>
