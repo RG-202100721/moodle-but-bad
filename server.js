@@ -56,39 +56,82 @@ router.get('/sweetalert2/dark.css', (req, res) => {
 
 //processamento dos pedidos CRUD
 router.get('/getAll*', (req, res) => {
-    var sql = "SELECT * FROM " + req.url.replace("/getAll", "");
+    var sql = `SELECT * FROM ${req.url.replace("/getAll", "")};`;
     dbcon.query(sql, function(err, result) {
    		if (err) throw err;
    		if (result) res.send(result);
         else res.send("0 results.");
 	});
 });
+/*app.get('/getSingle', (req, res) => {
+    var sql = `SELECT * FROM ${req.body["Tabela"]} WHERE ID = ${req.body["ID"]};`;
+    dbcon.query(sql, function(err, result) {
+   		if (err) throw err;
+        if (result) res.send(result);
+        else res.send("0 results.");
+	});
+});*/
 router.post('/create', (req, res) => {
-    var id = 0;
-    var sql = "SELECT COUNT(ID) AS id FROM " + req.body["Tabela"];
+    var id;
+    var sql = `SELECT ID FROM ${req.body["Tabela"]};`;
     dbcon.query(sql, function(err, result) {
         if (err) throw err;
-        if (result) id = result[0].id + 1; 
-        else res.send("0 results.");
-    });
+        if (result) { 
+            for (id = 1; id - 1 < Object.keys(result).length; id++) 
+                if (result[id - 1]["ID"] != id) break;
+        }
 
-    var sql = "INSERT INTO " + req.body["Tabela"];
+        sql = "INSERT INTO " + req.body["Tabela"] + " VALUES";
+        switch (req.body["Tabela"]) {
+            case "Aluno":
+                sql += `(${id}, '${req.body["Nome"]}', str_to_date('${req.body["Data_Nascimento"]}', '%Y-%m-%d'), '${req.body["Genero"]}', '${req.body["Email"]}', '${req.body["URLFoto"]}');`;
+                break;
+            case "Disciplina":
+                sql += `(${id}, '${req.body["Nome"]}', '${req.body["Docente"]}');`;
+                break;
+        }
+        dbcon.query(sql, function(err, result) {
+       		if (err) {
+                res.send("0 results.");
+                throw err;
+            }
+   		    else res.send(JSON.stringify(id));
+	    });
+    });
+});
+app.put('/edit', (req, res) => {
+    var sql = `UPDATE ${req.body["Tabela"]} SET `;
     switch (req.body["Tabela"]) {
         case "Aluno":
-            sql += " (Nome, Data_Nascimento, Genero, Email, URLFoto) VALUES " +
-                    `('${req.body["Nome"]}', str_to_date('${req.body["Data_Nascimento"]}', '%Y-%m-%d'), '${req.body["Genero"]}', '${req.body["Email"]}', '${req.body["URLFoto"]}');`;
+            sql += `Nome = '${req.body["Nome"]}', Data_Nascimento = str_to_date('${req.body["Data_Nascimento"]}', '%Y-%m-%d'), Genero = '${req.body["Genero"]}', Email = '${req.body["Email"]}', URLFoto = '${req.body["URLFoto"]}'`;
             break;
         case "Disciplina":
-            sql += " (Nome, Docente) VALUES " +
-                    `('${req.body["Nome"]}', '${req.body["Docente"]}');`;
+            sql += `Nome = '${req.body["Nome"]}', Docente = '${req.body["Docente"]}'`;
+            break;
+        case "Revisao":
+            
             break;
     }
+    sql += ` WHERE ID = ${req.body["ID"]};`
     dbcon.query(sql, function(err, result) {
-   		if (err) {
-            res.send("0 results.");
-            throw err;
-        }
-   		else res.send(JSON.stringify(id));
+   		if (err) throw err;
+   		if (result) res.send(result);
+        else res.send("0 results.");
+	});
+});
+router.delete('/delete', (req, res) => {
+    var sql = `DELETE FROM Inscricao WHERE ID${req.body["Tabela"]} = ${req.body["ID"]};`;
+    dbcon.query(sql, function(err, result) {
+   		if (err) throw err;
+	});
+    var sql = `DELETE FROM Revisao WHERE ID${req.body["Tabela"]} = ${req.body["ID"]};`;
+    dbcon.query(sql, function(err, result) {
+   		if (err) throw err;
+	});
+    var sql = `DELETE FROM ${req.body["Tabela"]} WHERE ID = ${req.body["ID"]};`;
+    dbcon.query(sql, function(err, result) {
+   		if (err) throw err;
+        else res.send(JSON.stringify("Deleted."));
 	});
 });
 
