@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "npm": "6.11.3"
+  },
   "dependencies": {
     "@sweetalert2/theme-dark": "^5.0.10",
     "express": "^4.17.3",
