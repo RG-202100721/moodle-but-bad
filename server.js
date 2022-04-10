@@ -35,6 +35,9 @@ function mimeType(filename) {
 }
 
 //processamento dos pedidos de ficheiros
+router.get('/RESET', (req, res) => { 
+    server.emit("RESET");
+});
 router.get('/STOP', (req, res) => { 
     server.emit("STOP");
 });
@@ -135,6 +138,10 @@ app.use(express.json());
 app.use(express.static('www'), router);
 const server = app.listen(options.default.port, () => { 
     console.log(`Listening on port ${options.default.port}`);
+});
+server.on('RESET', () => {
+    console.log("Resetting database...");
+    dbcon.create();
 });
 server.on('STOP', () => {
     dbcon.end();
