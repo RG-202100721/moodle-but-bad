@@ -4,8 +4,8 @@
   "description": "It's moodle, but bad.",
   "main": "server.js",
   "engines": {
-    "node": "13.3.x",
-    "npm": "6.11.x"
+    "node": "16.14.2",
+    "npm": "8.5.0"
   },
   "author": "RG_202100721",
   "dependencies": {
