@@ -138,21 +138,13 @@ header
 .botaoReset
 {
 	display: block;
+	text-align: left;
 	margin-top: 2.275%;
     margin-bottom: -8%;
 }
-/*
-.logoSec
-{
-	margin-top: 15px;
-	width: 92%;
-	max-width: 833px;
-	object-fit: contain;
-	align-self: center;
-}*/
 .conteudo
 {
-	text-align: left;
+	text-align: center;
 }
 .conteudo h1, th, h5
 {
@@ -169,6 +161,7 @@ header
 	line-height: 18px;
 	color: #FFFFFF;
 	margin: 0px;
+	margin-top: 20px;
 	margin-bottom: 17px;
 }
 .conteudo p
@@ -521,10 +514,6 @@ textarea
 	.botaoReset
 	{
     	margin-bottom: -13%;
-	}
-	.logoSec
-	{
-		margin-bottom: 15px;
 	}
 	.botoes
 	{

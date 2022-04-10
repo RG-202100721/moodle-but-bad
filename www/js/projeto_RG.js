@@ -1,3 +1,4 @@
+//declaração das classes Javascript
 class Turma 
 {
 	constructor(data) 
@@ -81,6 +82,7 @@ class Revisao
 	}
 }
 
+//inicialização das classes Javascript
 function check()
 {
 	if (typeof turma === 'undefined' || turma === null) 
@@ -93,19 +95,15 @@ function check()
 	}
 }
 
+//função de saída da conta do professor
 function exit()
 {
-	sessionStorage.setItem('sair', true);
-	window.location.href = 'index.html';
-}
-
-function reset()
-{	
 	sessionStorage.clear();
 	localStorage.clear();
-	window.location.href = 'index.html';
+	window.location.href = "/";
 }
 
+//mostra os conteúdos das classes na consola
 function viewBD()
 {
 	if (typeof turma !== 'undefined' || turma !== null) 
@@ -118,6 +116,7 @@ function viewBD()
 	}
 }
 
+//contrução da tabela com os conteúdos da base de dados
 function buildTable(table) {
 	var trHTML = '', x = 0, query;
 	getAll(table, (result) => { 
@@ -183,6 +182,7 @@ function buildTable(table) {
 	});
 }
 
+//função de tranformação de uma variável string em HTMLDocument
 function parseHTMLString(str) {
 	const parser = new DOMParser();
 	str = parser.parseFromString(str, "text/html");

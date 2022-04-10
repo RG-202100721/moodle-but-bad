@@ -61,11 +61,11 @@ ALTER TABLE Revisao ADD CONSTRAINT R_FK_A FOREIGN KEY (IDAluno) REFERENCES Aluno
 
 
 INSERT INTO Turma (Nome, Ano, Nome_Responsavel, Email_Responsavel, Curso) VALUES
-('Turma do 10º Ano', 10, 'Breia Cachão', 'prividenuliya@antawii.com', 'Técnico de Audiovisuais'),
-('Turma do 11º Ano', 11, 'Cisneiros Lampreia', 'rygcsd@playfuny.com', 'Técnico de Eletrónica'),
-('Turma 1 do 12º Ano', 12, 'Bia Barreno', '5wf810r@dyoeii.com', 'Programação de Sistemas Informáticos'),
-('Turma 2 do 12º Ano', 12, 'Tamára Flores', 'hypejhghjk@axie.ml', 'Programação de Sistemas Informáticos'),
-('Turma do 13º Ano', 13, 'Ludmila Feitosa', 'aegerter@pyhaihyrt.com', 'Automação e Computadores');
+('10-TA', 10, 'Breia Cachão', 'prividenuliya@antawii.com', 'Técnico de Audiovisuais'),
+('11-TE', 11, 'Cisneiros Lampreia', 'rygcsd@playfuny.com', 'Técnico de Eletrónica'),
+('12-1-PSI', 12, 'Bia Barreno', '5wf810r@dyoeii.com', 'Programação de Sistemas Informáticos'),
+('12-2-PSI', 12, 'Tamára Flores', 'hypejhghjk@axie.ml', 'Programação de Sistemas Informáticos'),
+('13-AC', 13, 'Ludmila Feitosa', 'aegerter@pyhaihyrt.com', 'Automação e Computadores');
 
 INSERT INTO Aluno (Nome, Data_Nascimento, Genero, Email, URLFoto) VALUES
 ('Garcez Milheiriço', str_to_date('2002.03.05', '%Y.%m.%d'), 'F', 'cusaum@eetieg.com', 'https://picsum.photos/seed/1/500'),

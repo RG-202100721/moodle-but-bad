@@ -7,48 +7,44 @@
 		<link rel="icon" type="image/icon" href="images/cursor.ico">
 		<link rel="stylesheet" type="text/css" href="css/projeto_RG.css">
 		<link rel="stylesheet" type="text/css" href="sweetalert2/dark.css">
-		<script type="text/javascript" src="sweetalert2.js"></script>
-		<script type="text/javascript" src="js/projeto_RG.js"></script>
-		<script type="text/javascript" src="js/CRUD_RG.js"></script>
-		<script type="text/javascript" src="js/barra_RG.js"></script>
-		<script type="text/javascript" src="js/index_RG.js"></script>
+		<script src="sweetalert2.js"></script>
+		<script src="js/projeto_RG.js"></script>
+		<script src="js/CRUD_RG.js"></script>
+		<script src="js/barra_RG.js"></script>
 	</head>
 	<body>
 		<header>
 			<span class="barraNavEntrar">☰</span>
 			<nav class="barraNav">
 				<span class="barraNavSair">x</span>
-				<a href="index.html" class="ativo">Início</a>
-				<a href="produtos.html">Produtos</a>
-				<a href="carrinho.html">Carrinho</a>
-				<a href="sobre.html">Sobre</a>
+				<a href="/index" class="ativo">Início</a>
+				<a href="/gestao">Gestão</a>
+				<a href="/informacao">Informação</a>
+				<a href="/revisao">Revisão</a>
+				<a href="/sobre">Sobre</a>
 			</nav>
 		</header>
 		<section class="conteudo">
-			<span class="botaoReset" onclick="reset()">&#10227;</span>
-			<h1>Área do Cliente</h1>
-			<h2>Utilize este espaço para se registar ou para entrar na sua conta.</h2>
+			<span class="botaoReset" onclick="exit()">&#10227;</span>
+			<h2>Utilize este espaço para entrar na sua conta.</h2>
 			<br>
 			<aside>
 				<p class="msgErro" id="err"></p>
 				<div id="info" style="display: none;"></div>
-				<div class="botoes">
-					<input id="regi" name="regi" type="button" onClick="show('registar')" value="Registar" />
-					<input id="logi" name="logi" type="button" onClick="show('login')" value="Entrar" />
-				</div>
 			</aside>
-			<button id="b1" type="button">Create</button>
-			<table id="test"></table>
 		</section>
 		<footer>
+			<p id="perfil" class="perfil" style="display: none;">Perfil:&nbsp;</p>
 			<ul class="footerLink">
-				<li><a href="index.html" class="ativo">Início</a></li>
+				<li><a href="/" class="ativo">Início</a></li>
 				<li>|</li>
-				<li><a href="produtos.html">Produtos</a></li>
+				<li><a href="/gestao">Gestão</a></li>
 				<li>|</li>
-				<li><a href="carrinho.html">Carrinho</a></li>
+				<li><a href="/informacao">Informação</a></li>
 				<li>|</li>
-				<li><a href="sobre.html">Sobre</a></li>
+				<li><a href="/revisoes">Revisões</a></li>
+				<li>|</li>
+				<li><a href="/sobre">Sobre</a></li>
 			</ul>
 			<p class="nota">© Copyright 2022 Websites do Rafa. <span>Todos os direitos são reservados.</span></p>
 		</footer>

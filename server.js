@@ -1,6 +1,5 @@
 const path = require("path");
 const express = require('express');
-const bodyParser = require("body-parser");
 const router = express.Router();
 const app = express();
 const options = {
@@ -23,8 +22,6 @@ const options = {
         "ico": "image/x-icon"
     }
 };
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.json());
 
 //cria e carrega a base de dados com informção
 const dbcon = require('./scripts/connection');
@@ -41,17 +38,13 @@ function mimeType(filename) {
 router.get('/STOP', (req, res) => { 
     server.emit("STOP");
 });
-router.get('/', (req, res) => { 
-    res.sendFile(path.join(__dirname + options.default.folder + options.default.document));
-});
-router.get('/favicon.ico', (req, res) => { 
-    res.sendFile(path.join(__dirname + options.default.folder + options.default.favicon)); 
-});
-router.get('/sweetalert2.js', (req, res) => { 
-    res.sendFile(path.join(__dirname + "/node_modules/sweetalert2/dist/sweetalert2.js")); 
-});
-router.get('/sweetalert2/dark.css', (req, res) => { 
-    res.sendFile(path.join(__dirname + "/node_modules/@sweetalert2/theme-dark/dark.css")); 
+router.get('/*', (req, res) => { 
+    switch (req.url) {
+        case "/favicon.ico": res.sendFile(path.join(__dirname + options.default.folder + options.default.favicon)); break;
+        case "/sweetalert2.js": res.sendFile(path.join(__dirname + "/node_modules/sweetalert2/dist/sweetalert2.js")); break;
+        case "/sweetalert2/dark.css": res.sendFile(path.join(__dirname + "/node_modules/@sweetalert2/theme-dark/dark.css")); break;
+        default: res.sendFile(path.join(__dirname + options.default.folder + options.default.document)); break;
+    }
 });
 
 //processamento dos pedidos CRUD
@@ -138,10 +131,10 @@ router.delete('/delete', (req, res) => {
 
 //criação do servidor http
 app.set("Content-Type", mimeType(path.join(__dirname + options.default.folder + options.default.document)));
+app.use(express.json());
 app.use(express.static('www'), router);
 const server = app.listen(options.default.port, () => { 
     console.log(`Listening on port ${options.default.port}`);
-    myApp = process.title;
 });
 server.on('STOP', () => {
     dbcon.end();
