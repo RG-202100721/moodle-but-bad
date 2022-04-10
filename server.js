@@ -7,7 +7,7 @@ const options = {
     "default": {
         "folder": "/www/",
         "document": "index.html",
-        "port": 1017,
+        "port": process.env.PORT || 1017,
         "favicon": "images/cursor.ico"
     },
     "extensions": {
