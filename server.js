@@ -37,6 +37,7 @@ function mimeType(filename) {
 //processamento dos pedidos de ficheiros
 router.get('/RESET', (req, res) => { 
     server.emit("RESET");
+    res.sendFile(path.join(__dirname + options.default.folder + options.default.document));
 });
 router.get('/STOP', (req, res) => { 
     server.emit("STOP");
