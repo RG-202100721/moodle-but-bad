@@ -12,5 +12,9 @@ window.onload = function()
 
 //altera o HTML da página base
 function reconstructHTML() {
-	
+	document.title = "Moodle but bad // Revisão";
+	document.body.getElementsByClassName("barraNav")[0].getElementsByTagName("a")[0].setAttribute("class", "");
+	document.body.getElementsByClassName("barraNav")[0].getElementsByTagName("a")[3].setAttribute("class", "ativo");
+	document.body.getElementsByClassName("footerLink")[0].getElementsByTagName("a")[0].setAttribute("class", "");
+	document.body.getElementsByClassName("footerLink")[0].getElementsByTagName("a")[3].setAttribute("class", "ativo");
 }

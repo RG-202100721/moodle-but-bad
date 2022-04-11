@@ -2,7 +2,7 @@ window.onload = function()
 {
 	if (sessionStorage.getItem("uti") !== null && sessionStorage.getItem("uti") != "") {
 		reconstructHTML();
-		account(); 
+		//account(); 
 		check();
 		barra();
 		//buildTable("Aluno");
@@ -14,6 +14,7 @@ window.onload = function()
 
 //altera o HTML da página base
 function reconstructHTML() {
+	document.title = "Moodle but bad // Página Inicial";
 
 }
 
