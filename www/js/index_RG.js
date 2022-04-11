@@ -1,24 +1,39 @@
 window.onload = function()
 {
-	account(); 
-	check();
-	barra();
-	//buildTable("Aluno");
-	//document.getElementById("b1").setAttribute("onclick", "showCreateBox('Aluno')" );
-	viewBD();
+	if (sessionStorage.getItem("uti") !== null && sessionStorage.getItem("uti") != "") {
+		reconstructHTML();
+		account(); 
+		check();
+		barra();
+		//buildTable("Aluno");
+		//document.getElementById("b1").setAttribute("onclick", "showCreateBox('Aluno')" );
+		viewBD();
+	}
+	else window.location.href = "/";
 };
+
+//altera o HTML da página base
+function reconstructHTML() {
+
+}
 
 function account()
 {
-	document.getElementById('perfil').innerHTML += "<span>" + localStorage.getItem("uti") + "</span>";
-	document.getElementById('perfil').style.display = 'block';
 	document.getElementById("info").innerHTML = "";
 	
-	if (localStorage.getItem("uti") !== null) { 
-		document.getElementById("info").innerHTML = '<h2>Perfil Atual:</h2><h5 style="font-weight: bold;">' + localStorage.getItem("uti") + '</h5><br><br>'; 
-	}
+	if (sessionStorage.getItem("uti") !== null) { document.getElementById("info").innerHTML = '<h2>Perfil Atual:</h2><h5 style="font-weight: bold;">' + sessionStorage.getItem("uti") + '</h5><br><br>'; }
 	else { document.getElementById("info").innerHTML = '<h2>Perfil Atual:</h2><h5 style="font-weight: bold;">Error</h5><br><br>'; }
 	
+	if (sessionStorage.getItem("id") !== null && sessionStorage.getItem("id") != 0) 
+	{
+		document.getElementById('regi').value = 'Alterar Detalhes';
+		document.getElementById('regi').setAttribute('onClick', 'alterar()');
+	}
+	else 
+	{
+		document.getElementById('regi').value = 'Apagar Contas';
+		document.getElementById('regi').setAttribute('onClick', 'apagar()');
+	}
 	
 	document.getElementById("logi").value = "Sair";
 	document.getElementById("logi").setAttribute("onClick", "exit();" ); 
