@@ -1,8 +1,8 @@
 var fs = require("fs");
 var mysql = require('mysql');
 
-var type = "notlocal";
-if (type == "local") {
+var port = process.env.PORT || 1017;
+if (port == 1017) {
     var con = mysql.createConnection({
         //credenciais do servidor mysql
         host: "localhost",
