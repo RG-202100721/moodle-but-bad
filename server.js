@@ -22,6 +22,7 @@ const options = {
         "ico": "image/x-icon"
     }
 };
+app.use(express.json());
 
 //cria e carrega a base de dados com informção
 const dbcon = require('./scripts/connection');
@@ -134,7 +135,6 @@ router.get('/*', (req, res) => {
 
 //criação do servidor http
 app.set("Content-Type", mimeType(path.join(__dirname + options.default.folder + options.default.document)));
-app.use(express.json());
 app.use(express.static('www'), router);
 const server = app.listen(options.default.port, () => { 
     console.log(`Listening on port ${options.default.port}`);

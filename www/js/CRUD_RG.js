@@ -1,8 +1,8 @@
 //pede todos os dados de uma tabela na base de dados (método GET)
-function getAll(table) 
+function getAll(table, callback) 
 {
     const xhttp = new XMLHttpRequest();
-    xhttp.open("GET", '/getAll' + table, false);
+    xhttp.open("GET", '/getAll' + table, true);
     xhttp.onload = () => { 
         var x = 0; 
         var query = JSON.parse(xhttp.response);
@@ -16,6 +16,7 @@ function getAll(table)
 			}
 			x++;
 		}
+        callback();
     };
     xhttp.onerror = () => { console.log(xhttp.response); };
     xhttp.send();
