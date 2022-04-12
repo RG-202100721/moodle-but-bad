@@ -1,9 +1,22 @@
 //pede todos os dados de uma tabela na base de dados (método GET)
-function getAll(table, callback) 
+function getAll(table) 
 {
     const xhttp = new XMLHttpRequest();
-    xhttp.open("GET", '/getAll' + table, true);
-    xhttp.onload = () => { callback(JSON.parse(xhttp.response)); };
+    xhttp.open("GET", '/getAll' + table, false);
+    xhttp.onload = () => { 
+        var x = 0; 
+        var query = JSON.parse(xhttp.response);
+		while (query[x] != null) {
+			switch (table) {
+				case "Turma": turma.push(new Turma(query[x])); break;              
+				case "Aluno": aluno.push(new Aluno(query[x])); aluno[x].birthday = aluno[x].birthday.split("T")[0]; break;
+				case "Disciplina": disciplina.push(new Disciplina(query[x])); break;
+				case "Inscricao": inscricao.push(new Inscricao(query[x])); break;
+				case "Revisao": revisao.push(new Revisao(query[x])); revisao[x].revision_day = revisao[x].revision_day.split("T")[0]; break;
+			}
+			x++;
+		}
+    };
     xhttp.onerror = () => { console.log(xhttp.response); };
     xhttp.send();
 }

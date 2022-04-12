@@ -34,26 +34,9 @@ function mimeType(filename) {
     return options.extensions[extension];
 }
 
-//processamento dos pedidos de ficheiros
-router.get('/RESET', (req, res) => { 
-    server.emit("RESET");
-    res.sendFile(path.join(__dirname + options.default.folder + options.default.document));
-});
-router.get('/STOP', (req, res) => { 
-    server.emit("STOP");
-});
-router.get('/*', (req, res) => { 
-    switch (req.url) {
-        case "/favicon.ico": res.sendFile(path.join(__dirname + options.default.folder + options.default.favicon)); break;
-        case "/sweetalert2.js": res.sendFile(path.join(__dirname + "/node_modules/sweetalert2/dist/sweetalert2.js")); break;
-        case "/sweetalert2/dark.css": res.sendFile(path.join(__dirname + "/node_modules/@sweetalert2/theme-dark/dark.css")); break;
-        default: res.sendFile(path.join(__dirname + options.default.folder + options.default.document)); break;
-    }
-});
-
 //processamento dos pedidos CRUD
 router.get('/getAll*', (req, res) => {
-    var sql = `SELECT * FROM ${req.url.replace("/getAll", "")};`;
+    var sql = `SELECT * FROM ${req.url.replace('/getAll','')};`;
     dbcon.query(sql, function(err, result) {
    		if (err) throw err;
    		if (result) res.send(result);
@@ -132,6 +115,22 @@ router.delete('/delete', (req, res) => {
 	});
 });
 
+//processamento dos pedidos de ficheiros
+router.get('/RESET', (req, res) => { 
+    server.emit("RESET");
+    res.sendFile(path.join(__dirname + options.default.folder + options.default.document));
+});
+router.get('/STOP', (req, res) => { 
+    server.emit("STOP");
+});
+router.get('/*', (req, res) => { 
+    switch (req.url) {
+        case "/favicon.ico": res.sendFile(path.join(__dirname + options.default.folder + options.default.favicon)); break;
+        case "/sweetalert2.js": res.sendFile(path.join(__dirname + "/node_modules/sweetalert2/dist/sweetalert2.js")); break;
+        case "/sweetalert2/dark.css": res.sendFile(path.join(__dirname + "/node_modules/@sweetalert2/theme-dark/dark.css")); break;
+        default: res.sendFile(path.join(__dirname + options.default.folder + options.default.document)); break;
+    }
+});
 
 //criação do servidor http
 app.set("Content-Type", mimeType(path.join(__dirname + options.default.folder + options.default.document)));
