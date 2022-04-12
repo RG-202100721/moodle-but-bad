@@ -67,7 +67,7 @@ header
 	border-top: 2px solid #333940;
     border-bottom: 2px solid #333940;
 }
-.barraNav, .paginaPessoal
+.barraNav
 {
 	display: flex;
 	flex-wrap: wrap;
@@ -78,7 +78,7 @@ header
 	height: 96%;
 	transition: ease 800ms;
 }
-.barraNav a, .paginaPessoal a
+.barraNav a
 {
 	margin: 0px 40px;
 	font-size: 20px;
@@ -89,16 +89,10 @@ header
 {
 	color: #FFFFFF;
 }
-.barraNav a:hover, .paginaPessoal a:hover
+.barraNav a:hover
 {
 	transition: ease 500ms;
     color: #FFFFFF;
-}
-.logoNav
-{
-	width: 140px;
-	height: 102px;
-	padding-top: 1px;
 }
 .barraNavEntrar
 {
@@ -139,6 +133,7 @@ header
 {
 	display: block;
 	text-align: left;
+	width: 50px;
 	margin-top: 2.275%;
     margin-bottom: -8%;
 }
@@ -180,7 +175,7 @@ header
 	margin: 0px;
 	padding: 0px;
 }
-.botoes, aside, .produto
+.botoes, aside
 {
 	display: flex;
     flex-wrap: nowrap;
@@ -230,110 +225,6 @@ textarea
 	color: #777777;
 	font-family: "Times New Roman";
 	font-size: 14px;
-}
-.produto
-{
-	margin-bottom: 60px;
-	width: 100%;
-}
-.produto:last-of-type
-{
-	margin-bottom: 17px;
-}
-.produto .imagem, #carrinho td img
-{
-	min-width: 250px;
-	width: 250px;
-    margin-right: 25px;
-}
-.produto .descricao
-{
-	width: 45%;
-}
-.produto .descPre
-{
-	color: #FFFFFF;
-}
-.produto .descPre span
-{
-	color: #0088CC;
-	display: block;
-	font-weight: bold;
-}
-.produto .shop
-{
-	display: flex;
-    flex-direction: row;
-    align-content: center;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: nowrap;
-	width: 250px;
-	margin-left: 25px;
-}
-.produto .shop img
-{
-	width: 45px;
-	height: 45px;
-}
-.produto .shop span
-{
-	color: #0088CC;
-	font-size: 45px;
-	text-align: center;
-}
-.produto .shop:hover
-{
-	cursor: pointer;
-}
-#carrinho table, #carrinho th, #carrinho tr, #carrinho td
-{
-	border-style: dashed;
-}
-#carrinho td img
-{
-	cursor: default;
-	margin: 0px;
-	height: 100%;
-}
-#carrinho table p, #carrinho table th
-{
-	color: #0088CC;
-}
-#carrinho table p, #carrinho table th, #carrinho table h2
-{
-	padding: 0px;
-	margin: 0px;
-}
-#carrinho .quantidade
-{
-	font-size: 75px;
-}
-#carrinho .preco
-{
-	font-size: 30px;
-}
-#addprod .texto
-{
-	margin: 0px;
-	width: 900px;
-}
-.labelIma
-{
-	padding: 3px 8px;
-	cursor: pointer;
-	color: #0088CC;
-	border: solid 2px #FFFFFF;
-	background-color: #262A2F;
-}
-.display
-{
-	width: 90%;
-	max-width: max-content;
-}
-.paginaPessoal
-{
-	padding-top: 14px;
 }
 
 /* Rodapé */
@@ -422,35 +313,6 @@ textarea
 	{
 		margin: 0px 30px 15px 30px;
 	}
-	.produto
-	{
-		margin-bottom: 40px;
-	}
-	.produto .imagem, #carrinho td img
-	{
-		min-width: 190px;
-		width: 190px;
-	}
-	.produto .descricao
-	{
-		width: 30%;
-	}
-	.produto .shop
-	{
-		width: 175px;
-	}
-	#carrinho .quantidade
-	{
-		font-size: 50px;
-	}
-	#carrinho .preco
-	{
-		font-size: 20px;
-	}
-	#addprod .texto
-	{
-		width: 500px;
-	}
 }
 	
 /* Regras CSS para ecrãs entre 0 a 600 px (telemóveis/smartphones) */
@@ -492,13 +354,6 @@ textarea
 		font-weight: bold;
 		margin: 48px;
 	}
-	.logoNav
-	{
-		height: 150px;
-		width: 100%;
-		object-fit: contain;
-		margin: 0px;
-	}
 	.barraNavEntrar
 	{
 		display: block;
@@ -518,49 +373,5 @@ textarea
 	.botoes
 	{
 		flex-wrap: wrap;
-	}
-	.produto
-	{
-		display: flex;
-    	flex-direction: column;
-		margin-bottom: 100px;
-	}
-	.produto:last-of-type
-	{
-		margin-bottom: 100px;
-	}
-	.produto .imagem
-	{
-		min-width: 0px;
-    	width: 250px;
-		margin-right: 0px;
-		margin-bottom: 20px;
-	}
-	.produto .descricao
-	{
-		width: 80%;
-	}
-	
-	.produto .shop
-	{
-		justify-content: space-between;
-		margin-left: 0px;
-	}
-	#carrinho td img
-	{
-		width: 100px;
-		min-width: 0px;
-	}
-	#carrinho table h2, #carrinho .preco
-	{
-		font-size: 15px;
-	}
-	#carrinho .quantidade
-	{
-		font-size: 40px;
-	}
-	#addprod .texto
-	{
-		width: auto;
 	}
 }

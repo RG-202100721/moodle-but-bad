@@ -2,7 +2,6 @@ window.onload = function()
 {
 	if (sessionStorage.getItem("uti") !== null && sessionStorage.getItem("uti") != "") {
 		reconstructHTML();
-		account();
 		check();
 		barra();
 		viewBD();
@@ -17,4 +16,5 @@ function reconstructHTML() {
 	document.body.getElementsByClassName("barraNav")[0].getElementsByTagName("a")[1].setAttribute("class", "ativo");
 	document.body.getElementsByClassName("footerLink")[0].getElementsByTagName("a")[0].setAttribute("class", "");
 	document.body.getElementsByClassName("footerLink")[0].getElementsByTagName("a")[1].setAttribute("class", "ativo");
+	
 }
