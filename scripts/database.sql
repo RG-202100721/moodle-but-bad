@@ -25,13 +25,15 @@ CREATE TABLE IF NOT EXISTS Inscricao (
 
 DROP TABLE IF EXISTS Revisao;
 CREATE TABLE IF NOT EXISTS Revisao (
+  ID int NOT NULL AUTO_INCREMENT, 
   Dia_Revisao date,  
   IDDisciplina int NOT NULL, 
   IDAluno int NOT NULL,
   Nota_Antes decimal(10,2),
   Nota_Depois decimal(10,2),
   Efetivada char,
-  Fechada char
+  Fechada char,
+  PRIMARY KEY (ID)
 ) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS Aluno;
