@@ -270,40 +270,47 @@ function showEditBox(table, id) {
 			title = "Editar Revisao (ID:"+ revisao[id - 1].id +")";
 			html = parseHTMLString(revisao[id - 1].getHtmlBlock());
 			if (revisao[id - 1].in_effect == 'S') {
-				html.getElementsByName("efetivada")[0].checked = true;
+				html.getElementsByName("efetivada")[0].setAttribute('checked', true);
 				html.getElementsByName("efetivada")[0].value = 'S';
 				html.getElementsByName("efetivada")[1].value = 'x';
 			}
 			else {
-				html.getElementsByName("efetivada")[1].checked = true;
+				html.getElementsByName("efetivada")[1].setAttribute('checked', true);
 				html.getElementsByName("efetivada")[0].value = 'x';
 				html.getElementsByName("efetivada")[1].value = 'N';
 			}
 			if (revisao[id - 1].closed == 'S') {
-				html.getElementsByName("fechada")[0].checked = true;
+				html.getElementsByName("fechada")[0].setAttribute('checked', true);
 				html.getElementsByName("fechada")[0].value = 'S';
 				html.getElementsByName("fechada")[1].value = 'x';
 			}
 			else {
-				html.getElementsByName("fechada")[1].checked = true;
+				html.getElementsByName("fechada")[1].setAttribute('checked', true);
 				html.getElementsByName("fechada")[0].value = 'x';
 				html.getElementsByName("fechada")[1].value = 'N';
 			}
-			var options = '<option selected disabled></option>';
-			for(var i = 0; i < disciplina.length; i++) {
-				if (revisao[id - 1].id_subject == disciplina[i].id) options += `<option value="${i + 1}" selected>${disciplina[i].name}</option>`;
-				else options += `<option value="${i + 1}">${disciplina[i].name}</option>`;
+			if (window.location.href.includes("/index")) {
+				var inner = html.getElementById("form").querySelectorAll("div")[2].outerHTML;
+				inner += html.getElementById("form").querySelectorAll("div")[3].outerHTML;
+				html.getElementsByTagName("form")[0].innerHTML = inner;
 			}
-			html.getElementById("disciplina").innerHTML += options;
-			options = '<option selected disabled></option>';
-			for(var i = 0; i < aluno.length; i++) {
-				if (revisao[id - 1].id_student == aluno[i].id) options += `<option value="${i + 1}" selected>${aluno[i].name}</option>`;
-				else options += `<option value="${i + 1}">${aluno[i].name}</option>`;
+			else {
+				var options = '<option selected disabled></option>';
+				for(var i = 0; i < disciplina.length; i++) {
+					if (revisao[id - 1].id_subject == disciplina[i].id) options += `<option value="${i + 1}" selected>${disciplina[i].name}</option>`;
+					else options += `<option value="${i + 1}">${disciplina[i].name}</option>`;
+				}
+				html.getElementById("disciplina").innerHTML += options;
+				options = '<option selected disabled></option>';
+				for(var i = 0; i < aluno.length; i++) {
+					if (revisao[id - 1].id_student == aluno[i].id) options += `<option value="${i + 1}" selected>${aluno[i].name}</option>`;
+					else options += `<option value="${i + 1}">${aluno[i].name}</option>`;
+				}
+				html.getElementById("aluno").innerHTML += options;
 			}
-			html.getElementById("aluno").innerHTML += options;
-			html = html.getElementById("form");
 			break;
     }
+	html = html.getElementById("form");
 	formCheck(title, html, () => { editData(table, id); });
 }
 
@@ -336,9 +343,11 @@ function formInputs(table, id) {
     {
         if ((i == 2 || i == 3) && form[i].value == 'x' && table == 'Aluno') {  }
 		else if ((i == 7 || i == 8 || i == 9 || i == 10) && form[i].value == 'x' && table == 'Revisao') {  }
-		else if ((i == 3 || i == 5) && table == 'Revisao') {  }
+		else if ((i == 3 || i == 5) && table == 'Revisao' && !window.location.href.includes("/index")) {  }
+		else if ((i == 0 || i == 1 || i == 2 || i == 3) && form[i].value == 'x' && table == 'Revisao' && window.location.href.includes("/index")) {  }
         else inputs.push(form[i].value);
     }
+	console.log(inputs);
     var data;
     switch (table) {
         case "Aluno":
@@ -361,17 +370,32 @@ function formInputs(table, id) {
             });
             break;
 		case "Revisao":
-            data = JSON.stringify({ 
-				"Tabela": table,
-				"ID": id,
-				"Dia_Revisao": inputs[0],
-				"IDDisciplina": inputs[1],
-				"IDAluno": inputs[2],
-				"Nota_Antes": inputs[3],
-				"Nota_Depois": inputs[4],
-				"Efetivada": inputs[5],
-				"Fechada": inputs[6]
-            });
+			if (window.location.href.includes("/index")) {
+				data = JSON.stringify({ 
+					"Tabela": table,
+					"ID": id,
+					"Dia_Revisao": revisao[id - 1].revision_day,
+					"IDDisciplina": revisao[id - 1].id_subject,
+					"IDAluno": revisao[id - 1].id_student,
+					"Nota_Antes": revisao[id - 1].grade_before,
+					"Nota_Depois": revisao[id - 1].grade_after,
+					"Efetivada": inputs[0],
+					"Fechada": inputs[1]
+				});
+			}
+			else {
+				data = JSON.stringify({ 
+					"Tabela": table,
+					"ID": id,
+					"Dia_Revisao": inputs[0],
+					"IDDisciplina": inputs[1],
+					"IDAluno": inputs[2],
+					"Nota_Antes": inputs[3],
+					"Nota_Depois": inputs[4],
+					"Efetivada": inputs[5],
+					"Fechada": inputs[6]
+				});
+			}
             break;
     }
 	return data;

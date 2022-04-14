@@ -4,9 +4,17 @@ window.onload = function()
 		reconstructHTML();
 		check();
 		barra();
-		//buildTable("Aluno");
-		//document.getElementById("b1").setAttribute("onclick", "showCreateBox('Aluno')" );
-		viewBD();
+		getAll("Aluno", () => {
+			getAll("Disciplina", () => {
+				getAll("Inscricao", () => {
+					getAll("Revisao", () => {
+						buildTable(revisao);
+						document.getElementById("create").setAttribute("onclick", "showCreateBox('Revisao')" );
+						viewBD();
+					});
+				});
+			});
+		});
 	}
 	else window.location.href = "/";
 };
@@ -14,5 +22,6 @@ window.onload = function()
 //altera o HTML da página base
 function reconstructHTML() {
 	document.title = "Moodle but bad // Página Inicial";
+	document.getElementsByTagName("h2")[0].innerText = "Utilize este espaço para alterar o estado das revisões.";
 	
 }
