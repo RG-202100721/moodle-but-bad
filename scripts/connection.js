@@ -45,13 +45,21 @@ exports.create = function () {
 exports.query = function (sql, callback) {
     con.query(sql, function (err, result) {
         if (err) throw err;
-        if (JSON.stringify(sql).includes("SELECT")) {
-            console.log('Database queried!\nQuery: ' + sql);
+        if (JSON.stringify(sql).includes("INSERT")) {
+            console.log(`Database row inserted! [Query: ${sql}]`);
             callback(null, result);
         }
-        else {
-            console.log('Database updated!\nQuery: ' + sql);
+        else if (JSON.stringify(sql).includes("UPDATE")){
+            console.log(`Database row updated! [Query: ${sql}]`);
             callback(null, null);
+        }
+        else if (JSON.stringify(sql).includes("DELETE")){
+            console.log(`Database row deleted! [Query: ${sql}]`);
+            callback(null, null);
+        }
+        else {
+            console.log(`Database queried! [Query: ${sql}]`);
+            callback(null, result);
         }
     });
 };
