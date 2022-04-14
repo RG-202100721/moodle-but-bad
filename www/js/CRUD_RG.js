@@ -68,6 +68,7 @@ function editData(table, id) {
         switch (table) {
             case "Aluno": text = 'Aluno editado! (ID: '+ id +')'; break;
             case "Disciplina": text = 'Disciplina editada! (ID: '+ id +')'; break;
+            case "Revisao": text = 'Revisão editada! (ID: '+ id +')'; break;
         }
         Swal.fire({
             icon: 'success',
@@ -109,6 +110,7 @@ function deleteData(table, id) {
                 switch (table) {
                     case "Aluno": text = 'Aluno apagado! (ID: '+ id +')'; break;
                     case "Disciplina": text = 'Disciplina apagada! (ID: '+ id +')'; break;
+                    case "Revisao": text = 'Revisão apagada! (ID: '+ id +')'; break;
                 }
                 Swal.fire({
                     icon: 'success',
