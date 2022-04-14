@@ -96,7 +96,6 @@ app.put('/edit', (req, res) => {
             break;
     }
     sql += ` WHERE ID = ${req.body["ID"]};`
-    console.log(sql);
     dbcon.query(sql, function(err, result) {
    		if (err) throw err;
    		if (result) res.send(result);
