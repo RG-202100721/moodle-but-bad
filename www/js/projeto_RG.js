@@ -40,8 +40,10 @@ class Aluno
 	   				'<input id="url" class="swal2-input" type="url" maxlength="255" value="'+ this.photo_url +'">' +
 				'</form>';
 	}
-	getTableCells()
-	{
+	getTableHead() {
+		return	'<th>#</th><th>Nome</th><th>Data de Nascimento</th><th>Sexo</th><th>Email</th><th>URL Foto</th><th>Ações</th>';
+	}
+	getTableRow() {
 		return  '<td>'+ this.id +'</td>' +
 				'<td>'+ this.name +'</td>' +
 				'<td>'+ this.birthday +'</td>' +
@@ -68,8 +70,10 @@ class Disciplina
                 	'<input id="docente" class="swal2-input" type="text" maxlength="255" value="'+ this.staff +'">' +
             	'</form>';
 	}
-	getTableCells()
-	{
+	getTableHead() {
+		return '<th>#</th><th>Nome</th><th>Docente</th>'
+	}
+	getTableRow() {
 		return	'<td>'+ this.id +'</td>' +
 				'<td>'+ this.name +'</td>' +
 				'<td>'+ this.staff +'</td>' +
@@ -131,9 +135,12 @@ class Revisao
 						'<label for="nao">Não</label></div>' +
 				'</form>';
 	}
-	getTableCells()
-	{
-		return	'<td>'+ this.revision_day +'</td>' +
+	getTableHead() {
+		return '<th>#</th><th>Dia da Revisão</th><th>Disciplina</th><th>Aluno</th><th>Nota Antes</th><th>Nota Depois</th><th>Efetivada</th><th>Fechada</th><th>Ações</th>';
+	}
+	getTableRow() {
+		return	'<td>'+ this.id +'</td>' +
+				'<td>'+ this.revision_day +'</td>' +
 				'<td>'+ disciplina[this.id_subject - 1].name +'</td>' +
 				'<td>'+ aluno[this.id_student - 1].name +'</td>' +
 				'<td>'+ this.grade_before +'</td>' +
@@ -182,8 +189,9 @@ function viewBD()
 //contrução da tabela com os conteúdos da base de dados
 function buildTable(data) {
 	var trHTML = '', x = 0;
+	trHTML += `<tr>${data[x].getTableHead()}</tr>`;
 	while (data[x] != null) {
-		trHTML += `<tr>${data[x].getTableCells()}</tr>`;
+		trHTML += `<tr>${data[x].getTableRow()}</tr>`;
 		x++;
 	}
 	document.getElementById("table").innerHTML += trHTML;
@@ -259,12 +267,10 @@ function showEditBox(table, id) {
 				html.getElementById('mas').value = 'x';
 				html.getElementById('fem').value = 'F';
 			}
-			html = html.getElementById("form");
             break;
         case "Disciplina":
             title = "Editar Disciplina (ID:"+ disciplina[id - 1].id +")";
             html = parseHTMLString(disciplina[id - 1].getHtmlBlock());
-			html = html.getElementById("form");
             break;
 		case "Revisao":
 			title = "Editar Revisao (ID:"+ revisao[id - 1].id +")";
@@ -347,7 +353,6 @@ function formInputs(table, id) {
 		else if ((i == 0 || i == 1 || i == 2 || i == 3) && form[i].value == 'x' && table == 'Revisao' && window.location.href.includes("/index")) {  }
         else inputs.push(form[i].value);
     }
-	console.log(inputs);
     var data;
     switch (table) {
         case "Aluno":
