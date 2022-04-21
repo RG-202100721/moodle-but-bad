@@ -17,7 +17,7 @@ class Aluno
 	{
 		this.id = data["ID"];
 		this.name = data["Nome"];
-		this.birthday = data["Data_Nascimento"];
+		this.birthday = data["Data_Nascimento"].split("T")[0];;
 		this.gender = data["Genero"];
 		this.email = data["Email"];
 		this.photo_url = data["URLFoto"];
@@ -50,8 +50,8 @@ class Aluno
 				'<td>'+ this.gender +'</td>' +
 				'<td>'+ this.email +'</td>' +
 				'<td><img src="'+ this.photo_url +'"></td>' +
-				'<td><button type="button" class="btn btn-outline-secondary" onclick="showEditBox(\'Aluno\', '+ this.id +')">Edit</button>' +
-				'<button type="button" class="btn btn-outline-danger" onclick="deleteData(\'Aluno\', '+ this.id +')">Del</button></td>';
+				'<td><button type="button" class="botaoEditar" onclick="showEditBox(\'Aluno\', '+ this.id +')">Editar</button>' +
+				'<button type="button" class="botaoApagar" onclick="deleteData(\'Aluno\', '+ this.id +')">Apagar</button></td>';
 	}
 }
 class Disciplina
@@ -77,8 +77,8 @@ class Disciplina
 		return	'<td>'+ this.id +'</td>' +
 				'<td>'+ this.name +'</td>' +
 				'<td>'+ this.staff +'</td>' +
-				'<td><button type="button" class="btn btn-outline-secondary" onclick="showEditBox(\'Disciplina\', '+ this.id +')">Edit</button>' +
-				'<button type="button" class="btn btn-outline-danger" onclick="deleteData(\'Disciplina\', '+ this.id +')">Del</button></td>';
+				'<td><button type="button" class="botaoEditar" onclick="showEditBox(\'Disciplina\', '+ this.id +')">Editar</button>' +
+				'<button type="button" class="botaoApagar" onclick="deleteData(\'Disciplina\', '+ this.id +')">Apagar</button></td>';
 	}
 }
 class Inscricao
@@ -95,8 +95,9 @@ class Revisao
 {
 	constructor(data) 
 	{
+		this.index = revisao.length + 1;
 		this.id = data["ID"];
-		this.revision_day = data["Dia_Revisao"];
+		this.revision_day = data["Dia_Revisao"].split("T")[0];
 		this.id_subject = data["IDDisciplina"];
 		this.id_student = data["IDAluno"];
 		this.grade_before = data["Nota_Antes"];
@@ -139,16 +140,18 @@ class Revisao
 		return '<th>#</th><th>Dia da Revisão</th><th>Disciplina</th><th>Aluno</th><th>Nota Antes</th><th>Nota Depois</th><th>Efetivada</th><th>Fechada</th><th>Ações</th>';
 	}
 	getTableRow() {
-		return	'<td>'+ this.id +'</td>' +
+		var html = '<td>'+ this.id +'</td>' +
 				'<td>'+ this.revision_day +'</td>' +
 				'<td>'+ disciplina[this.id_subject - 1].name +'</td>' +
 				'<td>'+ aluno[this.id_student - 1].name +'</td>' +
 				'<td>'+ this.grade_before +'</td>' +
 				'<td>'+ this.grade_after +'</td>' +
 				'<td>'+ this.in_effect +'</td>' +
-				'<td>'+ this.closed +'</td>' +
-				'<td><button type="button" class="btn btn-outline-secondary" onclick="showEditBox(\'Revisao\', '+ this.id +')">Edit</button>' +
-				'<button type="button" class="btn btn-outline-danger" onclick="deleteData(\'Revisao\', '+ this.id +')">Del</button></td>';
+				'<td>'+ this.closed +'</td>';
+		if (window.location.href.includes("/index")) html += '<td><button type="button" class="botaoEditar" onclick="showEditBox(\'Revisao\', '+ this.index +')">Editar</button></td>';
+		else html += '<td><button type="button" class="botaoEditar" onclick="showEditBox(\'Revisao\', '+ this.id +')">Editar</button>'+
+					'<button type="button" class="botaoApagar" onclick="deleteData(\'Revisao\', '+ this.id +')">Apagar</button></td>';
+		return html;
 	}
 }
 
@@ -378,7 +381,7 @@ function formInputs(table, id) {
 			if (window.location.href.includes("/index")) {
 				data = JSON.stringify({ 
 					"Tabela": table,
-					"ID": id,
+					"ID": revisao[id - 1].id,
 					"Dia_Revisao": revisao[id - 1].revision_day,
 					"IDDisciplina": revisao[id - 1].id_subject,
 					"IDAluno": revisao[id - 1].id_student,

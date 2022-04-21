@@ -9,10 +9,10 @@ function getAll(table, callback)
 		while (query[x] != null) {
 			switch (table) {
 				case "Turma": turma.push(new Turma(query[x])); break;              
-				case "Aluno": aluno.push(new Aluno(query[x])); aluno[x].birthday = aluno[x].birthday.split("T")[0]; break;
+				case "Aluno": aluno.push(new Aluno(query[x])); break;
 				case "Disciplina": disciplina.push(new Disciplina(query[x])); break;
 				case "Inscricao": inscricao.push(new Inscricao(query[x])); break;
-				case "Revisao": revisao.push(new Revisao(query[x])); revisao[x].revision_day = revisao[x].revision_day.split("T")[0]; break;
+				case "Revisao": case "RevisaoIndex": revisao.push(new Revisao(query[x])); break;
 			}
 			x++;
 		}
@@ -59,6 +59,7 @@ function createData(table) {
 //envia os dados editados para o registo selecionado (método PUT)
 function editData(table, id) {
     var data = formInputs(table, id);
+    if (window.location.href.includes("/index")) { id = revisao[id - 1].id; }
 
     const xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/edit", true);

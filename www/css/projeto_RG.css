@@ -42,17 +42,46 @@ form
 table, tr, td, th
 {
 	color: #FFFFFF;
-	border: 2px solid #333940;
+	border-width: 0px;
+	border-style: solid;
+	border-color: #333940;
+	box-sizing: border-box;
+    border-collapse: collapse;
+	padding: 8px 8px;
 }
 table
 {
+	display: block;
 	width: 100%;
+	overflow-x: auto;
+}
+tr, td, th
+{
+	border-bottom-width: 1px;
 }
 td img
 {
 	cursor: pointer;
 	width: 75px;
 	height: 75px;
+}
+
+/* Barra de Scroll do Browser */
+::-webkit-scrollbar 
+{
+	width: 15px;
+}
+::-webkit-scrollbar-track 
+{
+	background: #202324;
+}
+::-webkit-scrollbar-thumb 
+{
+	background: #454a4d; 
+}
+::-webkit-scrollbar-thumb:hover 
+{
+	background: #575e62; 
 }
 
 /* Barra de Navegação (Cabeçalho) */
@@ -143,7 +172,7 @@ header
 }
 .conteudo h1, th, h5
 {
-	font-size: 30px;
+	font-size: 25px;
 	font-weight: 400;
 	line-height: 30px;
 	color: #0088CC;
@@ -175,7 +204,11 @@ header
 	margin: 0px;
 	padding: 0px;
 }
-.botoes, aside
+.info
+{
+	width: 100%;
+}
+.botoes, aside, .infoHead
 {
 	display: flex;
     flex-wrap: nowrap;
@@ -188,26 +221,45 @@ aside
 {
 	flex-direction: column;
 }
-.botoes input
+.botoes
 {
-	padding-left: 75px;
-	padding-right: 75px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+.botoes input, .botaoEditar, .botaoApagar
+{
+	font-size: 15px;
+	padding: 10px 35px;
 	color: #0088CC;
 	background-color: #212529;
-	border: 2px #FFFFFF;
-	border-style: revert;
-	margin: 0px 70px 15px 70px;
+	border: 1px #FFFFFF;
+	border-style: ridge;
 }
-.botoes input:hover
+.botoes input:hover, .botaoEditar:hover, .botaoApagar:hover
 {
 	color: #FFFFFF;
 	background-color: #262A2F;
 	cursor: pointer;
 	border-color: #0088CC;
 }
-.texto, #addprod.texto
+.botaoEditar, .botaoApagar
+{
+	font-size: 12px;
+	padding: 5px 15px;
+}
+.botaoEditar
+{
+	margin-bottom: 5px;
+}
+.botaoApagar
+{
+	color: #941a25;
+}
+.botaoApagar:hover
+{
+	border-color: #941a25;
+}
+.texto
 {
 	margin-bottom: 10px;
 	color: #FFFFFF;
@@ -293,10 +345,6 @@ textarea
 		width: 50px;
 		height: 50px;
 	}
-	th
-	{
-		font-size: 25px;
-	}
 	
 	/* Barra de Navegação */
 	.barraNav a 
@@ -323,10 +371,6 @@ textarea
 		width: 25px;
 		height: 25px;
 	}
-	th
-	{
-		font-size: 18px;
-	}
 	
 	/* Barra de Navegação */
 	.barraNav
@@ -344,7 +388,7 @@ textarea
 	}
 	.barraNav a:first-of-type 
 	{
-    	margin-top: calc(50vh - 220px);
+    	margin-top: calc(50vh - 170px);
 	}
 	.barraNav a
 	{
