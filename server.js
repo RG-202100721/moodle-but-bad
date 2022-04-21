@@ -37,21 +37,17 @@ function mimeType(filename) {
 
 //processamento dos pedidos CRUD
 router.get('/getAll*', (req, res) => {
-    var sql = `SELECT * FROM ${req.url.replace('/getAll','')};`;
+    var sql = "";
+    if (req.url.replace('/getAll','') == "RevisaoIndex") {
+        sql = "SELECT * FROM revisao WHERE Dia_Revisao = CURRENT_DATE;";
+    }
+    else sql = `SELECT * FROM ${req.url.replace('/getAll','')};`;
     dbcon.query(sql, function(err, result) {
    		if (err) throw err;
    		if (result) res.send(result);
         else res.send("0 results.");
 	});
 });
-/*app.get('/getSingle', (req, res) => {
-    var sql = `SELECT * FROM ${req.body["Tabela"]} WHERE ID = ${req.body["ID"]};`;
-    dbcon.query(sql, function(err, result) {
-   		if (err) throw err;
-        if (result) res.send(result);
-        else res.send("0 results.");
-	});
-});*/
 router.post('/create', (req, res) => {
     var id;
     var sql = `SELECT ID FROM ${req.body["Tabela"]} ORDER BY ID ASC;`;
