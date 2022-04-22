@@ -17,7 +17,7 @@ class Aluno
 	{
 		this.id = data["ID"];
 		this.name = data["Nome"];
-		this.birthday = data["Data_Nascimento"].split("T")[0];;
+		this.birthday = data["Data_Nascimento"];
 		this.gender = data["Genero"];
 		this.email = data["Email"];
 		this.photo_url = data["URLFoto"];
@@ -97,7 +97,7 @@ class Revisao
 	{
 		this.index = revisao.length + 1;
 		this.id = data["ID"];
-		this.revision_day = data["Dia_Revisao"].split("T")[0];
+		this.revision_day = data["Dia_Revisao"];
 		this.id_subject = data["IDDisciplina"];
 		this.id_student = data["IDAluno"];
 		this.grade_before = data["Nota_Antes"];

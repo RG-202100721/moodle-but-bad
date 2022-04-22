@@ -25,7 +25,7 @@ function getAll(table, callback)
 //insere os dados criados numa tabela da base de dados (método POST)
 function createData(table) {
     var data = formInputs(table, 'no');
-
+    
     const xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/create", true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");

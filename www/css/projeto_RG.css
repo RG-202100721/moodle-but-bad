@@ -47,12 +47,13 @@ table, tr, td, th
 	border-color: #333940;
 	box-sizing: border-box;
     border-collapse: collapse;
-	padding: 8px 8px;
+	padding: 8px;
 }
 table
 {
-	display: block;
+	display: table;
 	width: 100%;
+	margin: 8px 0px;
 	overflow-x: auto;
 }
 tr, td, th
@@ -249,7 +250,8 @@ aside
 }
 .botaoEditar
 {
-	margin-bottom: 5px;
+	margin-right: 5px;
+	margin-bottom: 0px;
 }
 .botaoApagar
 {
@@ -340,6 +342,12 @@ textarea
 /* Regras CSS para ecrãs entre 601 a 1024 px (tablets) */
 @media only screen and (min-width : 601px) and (max-width : 1024px) 
 {
+	table
+	{
+		display: block;
+		margin: 0px;
+		padding: 0px;
+	}
 	td img
 	{
 		width: 50px;
@@ -361,11 +369,22 @@ textarea
 	{
 		margin: 0px 30px 15px 30px;
 	}
+	.botaoEditar
+	{
+		margin-right: 0px;
+		margin-bottom: 5px;
+	}
 }
 	
 /* Regras CSS para ecrãs entre 0 a 600 px (telemóveis/smartphones) */
 @media only screen and (min-width : 0px) and (max-width : 600px) 
 {
+	table
+	{
+		display: block;
+		margin: 0px;
+		padding: 0px;
+	}
 	td img
 	{
 		width: 25px;
@@ -417,5 +436,10 @@ textarea
 	.botoes
 	{
 		flex-wrap: wrap;
+	}
+	.botaoEditar
+	{
+		margin-right: 0px;
+		margin-bottom: 5px;
 	}
 }
