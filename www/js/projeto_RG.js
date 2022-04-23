@@ -71,7 +71,7 @@ class Disciplina
             	'</form>';
 	}
 	getTableHead() {
-		return '<th>#</th><th>Nome</th><th>Docente</th>'
+		return '<th>#</th><th>Nome</th><th>Docente</th><th>Ações</th>'
 	}
 	getTableRow() {
 		return	'<td>'+ this.id +'</td>' +
@@ -89,6 +89,29 @@ class Inscricao
 		this.id_subject = data["IDDisciplina"];
 		this.id_student = data["IDAluno"];
 		this.grade = data["Nota"];
+	}
+	getHtmlBlock(){
+		return 	'<form id="form">' +
+					'<label for="disciplina">Disciplina:</label>' +
+					'<select id="disciplina" class="swal2-select"></select>' +
+					'<br><label for="aluno">Aluno:</label>' +
+					'<select id="aluno" class="swal2-select"></select>' +
+					'<div class="swal2-range" style="display: flex; justify-content: center; align-items: center; flex-direction: row; flex-wrap: nowrap; margin-top: 10px;">' +
+						'<label for="nota" style="margin-top: 12px; width: 50px;">Nota:</label>' +
+						'<input id="nota" class="swal2-input" type="range" min="0" max="20" step=".01" value="'+ this.grade +'" oninput="this.nextElementSibling.value = this.value">' +
+						'<input type="number" class="swal2-input" style="width: 60px; margin-left: 0px; margin-right: 0px;" min="0" max="20" step=".01" value="'+ this.grade +'" oninput="this.previousElementSibling.value = this.value"></div>' +
+            	'</form>';
+	}
+	getTableHead() {
+		return '<th>#</th><th>Disciplina</th><th>Aluno</th><th>Nota</th><th>Ações</th>'
+	}
+	getTableRow() {
+		return	'<td>'+ this.id +'</td>' +
+				'<td>'+ disciplina[this.id_subject - 1].name +'</td>' +
+				'<td>'+ aluno[this.id_student - 1].name +'</td>' +
+				'<td>'+ this.grade +'</td>' +
+				'<td><button type="button" class="botaoEditar" onclick="showEditBox(\'Inscricao\', '+ this.id +')">Editar</button>' +
+				'<button type="button" class="botaoApagar" onclick="deleteData(\'Inscricao\', '+ this.id +')">Apagar</button></td>';
 	}
 }
 class Revisao
@@ -197,7 +220,7 @@ function buildTable(data) {
 		trHTML += `<tr>${data[x].getTableRow()}</tr>`;
 		x++;
 	}
-	document.getElementById("table").innerHTML += trHTML;
+	document.getElementById("table").innerHTML = trHTML;
 	document.getElementById("info").style.display = "";	
 }
 
@@ -249,7 +272,24 @@ function showCreateBox(table) {
 			for(var i = 0; i < inputs.length; i++) if(inputs[i].value == 'undefined') { inputs[i].value = "";}
 			html = html.getElementById("form");
 			break;
-    }
+		case "Inscricao":
+			title = "Criar Inscrição";
+			var test = new Inscricao('test','test','test','test');
+			html = parseHTMLString(test.getHtmlBlock());
+			html.getElementById("form").reset();
+			html.getElementById("nota").value = 0;
+			html.getElementById("nota").nextElementSibling.value = 0;
+			var options = '<option selected disabled></option>';
+			for(var i = 0; i < disciplina.length; i++) options += `<option value="${i + 1}">${disciplina[i].name}</option>`;
+			html.getElementById("disciplina").innerHTML += options;
+			options = '<option selected disabled></option>';
+			for(var i = 0; i < aluno.length; i++) options += `<option value="${i + 1}">${aluno[i].name}</option>`;
+			html.getElementById("aluno").innerHTML += options;
+			var inputs = html.getElementsByTagName('input');
+			for(var i = 0; i < inputs.length; i++) if(inputs[i].value == 'undefined') { inputs[i].value = "";}
+			html = html.getElementById("form");
+			break;
+	}
 	formCheck(title, html, () => { createData(table); });
 }
 
@@ -318,7 +358,23 @@ function showEditBox(table, id) {
 				html.getElementById("aluno").innerHTML += options;
 			}
 			break;
-    }
+		case "Inscricao":
+            title = "Editar Inscrição (ID:"+ inscricao[id - 1].id +")";
+            html = parseHTMLString(inscricao[id - 1].getHtmlBlock());
+			var options = '<option selected disabled></option>';
+			for(var i = 0; i < disciplina.length; i++) {
+				if (inscricao[id - 1].id_subject == disciplina[i].id) options += `<option value="${i + 1}" selected>${disciplina[i].name}</option>`;
+				else options += `<option value="${i + 1}">${disciplina[i].name}</option>`;
+			}
+			html.getElementById("disciplina").innerHTML += options;
+			options = '<option selected disabled></option>';
+			for(var i = 0; i < aluno.length; i++) {
+				if (inscricao[id - 1].id_student == aluno[i].id) options += `<option value="${i + 1}" selected>${aluno[i].name}</option>`;
+				else options += `<option value="${i + 1}">${aluno[i].name}</option>`;
+			}
+			html.getElementById("aluno").innerHTML += options;
+            break;
+	}
 	html = html.getElementById("form");
 	formCheck(title, html, () => { editData(table, id); });
 }
@@ -405,6 +461,15 @@ function formInputs(table, id) {
 				});
 			}
             break;
+		case "Inscricao":
+			data = JSON.stringify({ 
+				"Tabela": table,
+				"ID": id,
+				"IDDisciplina": inputs[0],
+				"IDAluno": inputs[1],
+				"Nota": inputs[2]
+			});
+			break;
     }
 	return data;
 }

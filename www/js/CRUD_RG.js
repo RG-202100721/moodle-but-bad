@@ -36,6 +36,7 @@ function createData(table) {
             case "Aluno": text = 'Aluno adicionado! (ID: '+ id +')'; break;
             case "Disciplina": text = 'Disciplina adicionada! (ID: '+ id +')'; break;
             case "Revisao": text = 'Revisão adicionada! (ID: '+ id +')'; break;
+            case "Inscricao": text = 'Inscrição adicionada! (ID: '+ id +')'; break;
         }
         Swal.fire({
             icon: 'success',
@@ -70,6 +71,7 @@ function editData(table, id) {
             case "Aluno": text = 'Aluno editado! (ID: '+ id +')'; break;
             case "Disciplina": text = 'Disciplina editada! (ID: '+ id +')'; break;
             case "Revisao": text = 'Revisão editada! (ID: '+ id +')'; break;
+            case "Inscricao": text = 'Inscrição editada! (ID: '+ id +')'; break;
         }
         Swal.fire({
             icon: 'success',
@@ -112,6 +114,7 @@ function deleteData(table, id) {
                     case "Aluno": text = 'Aluno apagado! (ID: '+ id +')'; break;
                     case "Disciplina": text = 'Disciplina apagada! (ID: '+ id +')'; break;
                     case "Revisao": text = 'Revisão apagada! (ID: '+ id +')'; break;
+                    case "Inscricao": text = 'Inscrição apagada! (ID: '+ id +')'; break;
                 }
                 Swal.fire({
                     icon: 'success',

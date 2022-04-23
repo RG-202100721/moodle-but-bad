@@ -59,21 +59,13 @@ router.post('/create', (req, res) => {
         }
         sql = "INSERT INTO " + req.body["Tabela"] + " VALUES ";
         switch (req.body["Tabela"]) {
-            case "Aluno":
-                sql += `(${id}, '${req.body["Nome"]}', str_to_date('${req.body["Data_Nascimento"]}', '%Y-%m-%d'), '${req.body["Genero"]}', '${req.body["Email"]}', '${req.body["URLFoto"]}');`;
-                break;
-            case "Disciplina":
-                sql += `(${id}, '${req.body["Nome"]}', '${req.body["Docente"]}');`;
-                break;
-            case "Revisao":
-                sql += `(${id}, str_to_date('${req.body["Dia_Revisao"]}', '%Y-%m-%d'), ${req.body["IDDisciplina"]}, ${req.body["IDAluno"]}, ${req.body["Nota_Antes"]}, ${req.body["Nota_Depois"]}, '${req.body["Efetivada"]}', '${req.body["Fechada"]}');`;
-                break;
+            case "Aluno": sql += `(${id}, '${req.body["Nome"]}', '${req.body["Data_Nascimento"]}', '${req.body["Genero"]}', '${req.body["Email"]}', '${req.body["URLFoto"]}');`; break;
+            case "Disciplina": sql += `(${id}, '${req.body["Nome"]}', '${req.body["Docente"]}');`; break;
+            case "Revisao": sql += `(${id}, '${req.body["Dia_Revisao"]}', ${req.body["IDDisciplina"]}, ${req.body["IDAluno"]}, ${req.body["Nota_Antes"]}, ${req.body["Nota_Depois"]}, '${req.body["Efetivada"]}', '${req.body["Fechada"]}');`; break;
+            case "Inscricao": sql += `(${id}, ${req.body["IDDisciplina"]}, ${req.body["IDAluno"]}, ${req.body["Nota"]})`; break;
         }
         dbcon.query(sql, function(err, result) {
-       		if (err) {
-                res.send("0 results.");
-                throw err;
-            }
+       		if (err) { res.send("0 results.");  throw err; }
    		    else res.send(JSON.stringify(id));
 	    });
     });
@@ -81,15 +73,10 @@ router.post('/create', (req, res) => {
 app.put('/edit', (req, res) => {
     var sql = `UPDATE ${req.body["Tabela"]} SET `;
     switch (req.body["Tabela"]) {
-        case "Aluno":
-            sql += `Nome = '${req.body["Nome"]}', Data_Nascimento = str_to_date('${req.body["Data_Nascimento"]}', '%Y-%m-%d'), Genero = '${req.body["Genero"]}', Email = '${req.body["Email"]}', URLFoto = '${req.body["URLFoto"]}'`;
-            break;
-        case "Disciplina":
-            sql += `Nome = '${req.body["Nome"]}', Docente = '${req.body["Docente"]}'`;
-            break;
-        case "Revisao":
-            sql += `Dia_Revisao = str_to_date('${req.body["Dia_Revisao"]}', '%Y-%m-%d'), IDDisciplina = ${req.body["IDDisciplina"]}, IDAluno = ${req.body["IDAluno"]}, Nota_Antes = ${req.body["Nota_Antes"]}, Nota_Depois = ${req.body["Nota_Depois"]}, Efetivada = '${req.body["Efetivada"]}', Fechada = '${req.body["Fechada"]}'`;
-            break;
+        case "Aluno": sql += `Nome = '${req.body["Nome"]}', Data_Nascimento = '${req.body["Data_Nascimento"]}', Genero = '${req.body["Genero"]}', Email = '${req.body["Email"]}', URLFoto = '${req.body["URLFoto"]}'`; break;
+        case "Disciplina": sql += `Nome = '${req.body["Nome"]}', Docente = '${req.body["Docente"]}'`; break;
+        case "Revisao": sql += `Dia_Revisao = '${req.body["Dia_Revisao"]}', IDDisciplina = ${req.body["IDDisciplina"]}, IDAluno = ${req.body["IDAluno"]}, Nota_Antes = ${req.body["Nota_Antes"]}, Nota_Depois = ${req.body["Nota_Depois"]}, Efetivada = '${req.body["Efetivada"]}', Fechada = '${req.body["Fechada"]}'`; break;
+        case "Inscricao": sql += `IDDisciplina = ${req.body["IDDisciplina"]}, IDAluno = ${req.body["IDAluno"]}, Nota = ${req.body["Nota"]}`; break;
     }
     sql += ` WHERE ID = ${req.body["ID"]};`
     dbcon.query(sql, function(err, result) {
