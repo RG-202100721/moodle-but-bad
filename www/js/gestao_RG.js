@@ -68,6 +68,7 @@ function reconstructHTML() {
 	input.setAttribute("onclick", "changeTable('inscricao')");
 	document.getElementsByClassName("botoes")[1].appendChild(input);
 }
+//função de mundança de tabela por sessionStorage
 function changeTable(name) {
 	sessionStorage.setItem("table", name);
 	location.reload(1);

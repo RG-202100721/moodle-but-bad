@@ -18,6 +18,7 @@ function reconstructHTML() {
 	document.getElementById("logi").setAttribute("onClick", "login()" );
 	document.getElementById("info").style.display = "";
 }
+//verificação do campo utilizador
 function login() {
 	var uti = document.forms[0].elements[0];
 	if (uti.value != '') {

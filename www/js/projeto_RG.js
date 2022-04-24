@@ -10,6 +10,17 @@ class Turma
 		this.email_res = data["Email_Responsavel"];
 		this.course = data["Curso"];
 	}
+	getTableHead() {
+		return	'<th style="color: #D68200">#</th><th style="color: #D68200">Nome</th><th style="color: #D68200">Ano</th><th style="color: #D68200">Nome do Responsável</th><th style="color: #D68200">Email do Responsável</th><th style="color: #D68200">Curso</th>';
+	}
+	getTableRow() {
+		return  '<td>'+ this.id +'</td>' +
+				'<td>'+ this.name +'</td>' +
+				'<td>'+ this.year +'</td>' +
+				'<td>'+ this.name_res +'</td>' +
+				'<td>'+ this.email_res +'</td>' +
+				'<td>'+ this.course +'</td>';
+	}
 }
 class Aluno
 {
@@ -41,17 +52,20 @@ class Aluno
 				'</form>';
 	}
 	getTableHead() {
-		return	'<th>#</th><th>Nome</th><th>Data de Nascimento</th><th>Sexo</th><th>Email</th><th>URL Foto</th><th>Ações</th>';
+		var head = '<th>#</th><th>Nome</th><th>Data de Nascimento</th><th>Sexo</th><th>Email</th><th>URL Foto</th>';
+		if (!window.location.href.includes("/informacao")) head += '<th>Ações</th>';
+		return head;
 	}
 	getTableRow() {
-		return  '<td>'+ this.id +'</td>' +
-				'<td>'+ this.name +'</td>' +
-				'<td>'+ this.birthday +'</td>' +
-				'<td>'+ this.gender +'</td>' +
-				'<td>'+ this.email +'</td>' +
-				'<td><img src="'+ this.photo_url +'"></td>' +
-				'<td><button type="button" class="botaoEditar" onclick="showEditBox(\'Aluno\', '+ this.id +')">Editar</button>' +
-				'<button type="button" class="botaoApagar" onclick="deleteData(\'Aluno\', '+ this.id +')">Apagar</button></td>';
+		var html = 	'<td>'+ this.id +'</td>' +
+					'<td>'+ this.name +'</td>' +
+					'<td>'+ this.birthday +'</td>' +
+					'<td>'+ this.gender +'</td>' +
+					'<td>'+ this.email +'</td>' +
+					'<td><img src="'+ this.photo_url +'"></td>';
+		if (!window.location.href.includes("/informacao")) html += '<td><button type="button" class="botaoEditar" onclick="showEditBox(\'Aluno\', '+ this.id +')">Editar</button>' +
+															'<button type="button" class="botaoApagar" onclick="deleteData(\'Aluno\', '+ this.id +')">Apagar</button></td>';
+		return html;
 	}
 }
 class Disciplina
@@ -217,6 +231,7 @@ function buildTable(data) {
 	var trHTML = '', x = 0;
 	trHTML += `<tr>${data[x].getTableHead()}</tr>`;
 	while (data[x] != null) {
+		if (data == turma && data[x].id != 1) break;
 		trHTML += `<tr>${data[x].getTableRow()}</tr>`;
 		x++;
 	}
