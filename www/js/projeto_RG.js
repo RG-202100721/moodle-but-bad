@@ -144,9 +144,12 @@ class Revisao
 	}
 	getHtmlBlock()
 	{
+		var today = new Date();
+		if ((today.getMonth() + 1) <= 9) today = today.getFullYear() + '-0'+ (today.getMonth() + 1)+'-'+ today.getDate();
+		else today = today.getFullYear() + '-'+ (today.getMonth() + 1)+'-'+ today.getDate();
 		return	'<form id="form">' +
 					'<label for="dia_revisao">Dia de Revisão:</label>' +
-					'<input id="dia_revisao" class="swal2-input" type="date" value="'+ this.revision_day +'">' +
+					'<input id="dia_revisao" class="swal2-input" type="date" value="'+ this.revision_day +'" min='+ today +'>' +
 					'<br><label for="disciplina">Disciplina:</label>' +
 					'<select id="disciplina" class="swal2-select"></select>' +
 					'<br><label for="aluno">Aluno:</label>' +

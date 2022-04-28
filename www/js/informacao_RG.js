@@ -34,7 +34,7 @@ function reconstructHTML() {
 function addTable(n, text) {
 	document.getElementById("info").id = "info" + n;
 	document.getElementById("table").id = "table" + n;
-	document.getElementsByTagName("aside")[0].innerHTML += 	'<div class="info" id="info" style="display: none;">' +
+	document.getElementsByTagName("aside")[0].innerHTML += 	'<br><div class="info" id="info" style="display: none;">' +
 																'<div class="botoes">' +
 																	'<h2 style="font-size: 25px;"></h2>' +
 																	'<input type="button" id="filter" value="Filtrar"/></div>' +
@@ -58,11 +58,11 @@ function filtrarDisciplina() {
 			else {
 				document.getElementsByTagName("h2")[2].innerText = `Alunos (${disciplina[id - 1].name})`;
 				var table, tr;
-				table = document.getElementById("table");//
+				table = document.getElementById("table");
 				tr = table.getElementsByTagName("tr");
 				for (var x = 0; x < aluno.length; x++) {
 					for (var i = 0; i < inscricao.length; i++) 
-						if (inscricao[i].id_subject == id && inscricao[i].id_student == x + 1) { tr[x + 1].style.display = ""; break;}
+						if (inscricao[i].id_subject == id && inscricao[i].id_student == x + 1) { tr[x + 1].style.display = ""; break; }
 						else tr[x + 1].style.display = "none";
 				}
 			}
