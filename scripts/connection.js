@@ -29,14 +29,14 @@ exports.checkPort = () => {
 //criação da conexão ao servidor mysql
 exports.start = () => {
     con = mysql.createConnection(dbconfig);
-    con.connect(function(err) {
+    con.connect((err) => {
         if(err) {
             console.log('Error DB Connection:', err);
             setTimeout(exports.start, 2000);
         }
         console.log("Connected!");
     });
-    con.on('error', () => {
+    con.on('error', (err) => {
         console.log('Error DB Connection:', err);
         if(err.code === 'PROTOCOL_CONNECTION_LOST') exports.start;
         else throw err;
