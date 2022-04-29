@@ -34,7 +34,7 @@ exports.start = () => {
             console.log('Error DB Connection:', err);
             setTimeout(exports.start, 2000);
         }
-        console.log("Connected!");
+        else console.log("Connected!");
     });
     con.on('error', (err) => {
         console.log('Error DB Connection:', err);
@@ -55,7 +55,14 @@ exports.create = () => {
 //faz uma query à base de dados (select, update, insert and delete)
 exports.query = (sql, callback) => {
     con.query(sql, function (err, result) {
-        if (err) throw err;
+        if (err) {
+            console.log('Error DB Connection:', err);
+            if(err.code === 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR') {
+                exports.start;
+                exports.query(sql, callback);
+            }
+            else throw err;
+        }
         if (JSON.stringify(sql).includes("INSERT")) {
             console.log(`Database row inserted! [Query: ${sql}]`);
             callback(null, result);
