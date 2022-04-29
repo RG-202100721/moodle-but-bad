@@ -264,7 +264,7 @@ function showCreateBox(table) {
             break;
         case "Disciplina":
             title = "Criar Disciplina";
-			var test = new Aluno('test','test','test','test','test');
+			var test = new Disciplina('test','test','test');
 			html = parseHTMLString(test.getHtmlBlock());
 			html.getElementById("form").reset();
 			var inputs = html.getElementsByTagName('input');
