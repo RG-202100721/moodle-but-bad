@@ -39,7 +39,7 @@ function mimeType(filename) {
 router.get('/getAll*', (req, res) => {
     var sql = "";
     if (req.url.replace('/getAll','') == "RevisaoIndex") {
-        sql = "SELECT * FROM revisao WHERE DATE(Dia_Revisao) = CURRENT_DATE;";
+        sql = "SELECT * FROM Revisao WHERE DATE(Dia_Revisao) = CURRENT_DATE;";
     }
     else sql = `SELECT * FROM ${req.url.replace('/getAll','')};`;
     dbcon.query(sql, function(err, result) {
