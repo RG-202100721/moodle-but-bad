@@ -1,35 +1,19 @@
 var fs = require("fs");
 var mysql = require('mysql');
-var port = process.env.PORT || 1017;
-
-exports.checkPort = () => {
-    if (port == 1017) {
-        dbconfig = {
-            //credenciais do servidor mysql local
-            connectionLimit: 100,
-            host: "localhost",
-            user: "root",
-            database: "prog_web_projeto",
-            password: "",
-            multipleStatements: true
-        };
-    }
-    else {
-        dbconfig = {
-            //credenciais do servidor mysql
-            connectionLimit: 100,
-            host: "remotemysql.com",
-            port: 3306,
-            database: "XuJ9K1LH7W",
-            user: "XuJ9K1LH7W",
-            password: "iXpUAq7fVx",
-            multipleStatements: true
-        };
-    }
-}
 
 //criação da conexão ao servidor mysql
 exports.start = () => {
+    dbconfig = {
+        //credenciais do servidor mysql
+        connectionLimit: 100,
+        host: "remotemysql.com",
+        port: 3306,
+        database: "XuJ9K1LH7W",
+        user: "XuJ9K1LH7W",
+        password: "iXpUAq7fVx",
+        multipleStatements: true
+    };
+
     pool = mysql.createPool(dbconfig);
     pool.getConnection((err, con) => {
 		if (err) console.log('Error in DB connection (start): ' + err);

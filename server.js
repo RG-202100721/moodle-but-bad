@@ -26,7 +26,6 @@ app.use(express.json());
 
 //cria e carrega a base de dados com informção
 const dbcon = require('./scripts/connection');
-dbcon.checkPort();
 dbcon.start();
 dbcon.create();
 
