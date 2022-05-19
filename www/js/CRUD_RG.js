@@ -4,17 +4,33 @@ function getAll(table, callback)
     const xhttp = new XMLHttpRequest();
     xhttp.open("GET", '/getAll' + table, true);
     xhttp.onload = () => { 
-        var x = 0; 
+        var x = 0, y = 0; 
         var query = JSON.parse(xhttp.response);
-		while (query[x] != null) {
+        while (query[x] != null) {
 			switch (table) {
-				case "Turma": turma.push(new Turma(query[x])); break;              
-				case "Aluno": aluno.push(new Aluno(query[x])); break;
-				case "Disciplina": disciplina.push(new Disciplina(query[x])); break;
-				case "Inscricao": inscricao.push(new Inscricao(query[x])); break;
-				case "Revisao": case "RevisaoIndex": revisao.push(new Revisao(query[x])); break;
+				case "Turma": 
+                    while (query[x]["ID"] != y + 1) { turma.push(new Turma('skip')); y++; }
+                    turma.push(new Turma(query[x])); 
+                    break;              
+				case "Aluno": 
+                    while (query[x]["ID"] != y + 1) { aluno.push(new Aluno('skip')); y++; }
+                    aluno.push(new Aluno(query[x]));
+                    break;
+				case "Disciplina": 
+                    while (query[x]["ID"] != y + 1) { disciplina.push(new Disciplina('skip')); y++; }
+                    disciplina.push(new Disciplina(query[x])); 
+                    break;
+				case "Inscricao": 
+                    while (query[x]["ID"] != y + 1) { inscricao.push(new Inscricao('skip')); y++; }
+                    inscricao.push(new Inscricao(query[x])); 
+                    break;
+				case "Revisao": case "RevisaoIndex": 
+                    while (query[x]["ID"] != y + 1) { revisao.push(new Revisao('skip')); y++; }
+                    revisao.push(new Revisao(query[x])); 
+                    break;
 			}
-			x++;
+            x++;
+            y++;
 		}
         callback();
     };

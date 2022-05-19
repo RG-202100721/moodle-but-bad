@@ -34,11 +34,15 @@ class Aluno
 		this.photo_url = data["URLFoto"];
 	}
 	getHtmlBlock() {
+		var today = new Date();
+		today.setFullYear(today.getFullYear() - 18);
+		if ((today.getMonth() + 1) <= 9) today = today.getFullYear() + '-0'+ (today.getMonth() + 1)+'-'+ today.getDate();
+		else today = today.getFullYear() + '-'+ (today.getMonth() + 1)+'-'+ today.getDate();
 		return  '<form id="form">' +
 					'<label for="nome">Nome:</label>' +
 					'<input id="nome" class="swal2-input" type="text" maxlength="255" value="'+ this.name +'">' +
 					'<br><label for="data_nascimento">Data de Nascimento:</label>' +
-					'<input id="data_nascimento" class="swal2-input" type="date" value="'+ this.birthday +'">' +
+					'<input id="data_nascimento" class="swal2-input" type="date" value="'+ this.birthday +'" max='+ today +'>' +
 					'<div style="display: flex; justify-content: center; align-items: center; flex-direction: row; flex-wrap: nowrap; margin-top: 10px;">' +
 						'<label for="genero">Género:</label>' +
 						'<input id="mas" name="genero" class="swal2-input" type="radio" value="" style="margin-bottom: 6px; margin-top: 6px;" onclick="document.getElementById(\'mas\').value = \'M\'; document.getElementById(\'fem\').value = \'x\';">' +
@@ -235,7 +239,7 @@ function buildTable(data) {
 	trHTML += `<tr>${data[x].getTableHead()}</tr>`;
 	while (data[x] != null) {
 		if (data == turma && data[x].id != 1) break;
-		trHTML += `<tr>${data[x].getTableRow()}</tr>`;
+		if (data[x].id != undefined) trHTML += `<tr>${data[x].getTableRow()}</tr>`;
 		x++;
 	}
 	document.getElementById("table").innerHTML = trHTML;
@@ -255,7 +259,7 @@ function showCreateBox(table) {
     switch (table) {
         case "Aluno":
             title = "Criar Aluno";
-			var test = new Aluno('test','test','test','test','test');
+			var test = new Aluno('test','test','test','test','test','test');
 			html = parseHTMLString(test.getHtmlBlock());
 			html.getElementById("form").reset();
 			var inputs = html.getElementsByTagName('input');
@@ -281,10 +285,10 @@ function showCreateBox(table) {
 			html.getElementById("nota_depois").value = 0;
 			html.getElementById("nota_depois").nextElementSibling.value = 0;
 			var options = '<option selected disabled></option>';
-			for(var i = 0; i < disciplina.length; i++) options += `<option value="${i + 1}">${disciplina[i].name}</option>`;
+			for(var i = 0; i < disciplina.length; i++) if (disciplina[i].name != undefined) options += `<option value="${i + 1}">${disciplina[i].name}</option>`;
 			html.getElementById("disciplina").innerHTML += options;
 			options = '<option selected disabled></option>';
-			for(var i = 0; i < aluno.length; i++) options += `<option value="${i + 1}">${aluno[i].name}</option>`;
+			for(var i = 0; i < aluno.length; i++) if (aluno[i].name != undefined) options += `<option value="${i + 1}">${aluno[i].name}</option>`;
 			html.getElementById("aluno").innerHTML += options;
 			var inputs = html.getElementsByTagName('input');
 			for(var i = 0; i < inputs.length; i++) if(inputs[i].value == 'undefined') { inputs[i].value = "";}
@@ -298,10 +302,10 @@ function showCreateBox(table) {
 			html.getElementById("nota").value = 0;
 			html.getElementById("nota").nextElementSibling.value = 0;
 			var options = '<option selected disabled></option>';
-			for(var i = 0; i < disciplina.length; i++) options += `<option value="${i + 1}">${disciplina[i].name}</option>`;
+			for(var i = 0; i < disciplina.length; i++) if (disciplina[i].name != undefined) options += `<option value="${i + 1}">${disciplina[i].name}</option>`;
 			html.getElementById("disciplina").innerHTML += options;
 			options = '<option selected disabled></option>';
-			for(var i = 0; i < aluno.length; i++) options += `<option value="${i + 1}">${aluno[i].name}</option>`;
+			for(var i = 0; i < aluno.length; i++) if (aluno[i].name != undefined) options += `<option value="${i + 1}">${aluno[i].name}</option>`;
 			html.getElementById("aluno").innerHTML += options;
 			var inputs = html.getElementsByTagName('input');
 			for(var i = 0; i < inputs.length; i++) if(inputs[i].value == 'undefined') { inputs[i].value = "";}
@@ -364,14 +368,18 @@ function showEditBox(table, id) {
 			else {
 				var options = '<option selected disabled></option>';
 				for(var i = 0; i < disciplina.length; i++) {
-					if (revisao[id - 1].id_subject == disciplina[i].id) options += `<option value="${i + 1}" selected>${disciplina[i].name}</option>`;
-					else options += `<option value="${i + 1}">${disciplina[i].name}</option>`;
+					if (disciplina[i].name != undefined) {
+						if (revisao[id - 1].id_subject == disciplina[i].id) options += `<option value="${i + 1}" selected>${disciplina[i].name}</option>`;
+						else options += `<option value="${i + 1}">${disciplina[i].name}</option>`;
+					}
 				}
 				html.getElementById("disciplina").innerHTML += options;
 				options = '<option selected disabled></option>';
 				for(var i = 0; i < aluno.length; i++) {
-					if (revisao[id - 1].id_student == aluno[i].id) options += `<option value="${i + 1}" selected>${aluno[i].name}</option>`;
-					else options += `<option value="${i + 1}">${aluno[i].name}</option>`;
+					if (aluno[i].name != undefined) {
+						if (revisao[id - 1].id_student == aluno[i].id) options += `<option value="${i + 1}" selected>${aluno[i].name}</option>`;
+						else options += `<option value="${i + 1}">${aluno[i].name}</option>`;
+					}
 				}
 				html.getElementById("aluno").innerHTML += options;
 			}
@@ -381,14 +389,18 @@ function showEditBox(table, id) {
             html = parseHTMLString(inscricao[id - 1].getHtmlBlock());
 			var options = '<option selected disabled></option>';
 			for(var i = 0; i < disciplina.length; i++) {
-				if (inscricao[id - 1].id_subject == disciplina[i].id) options += `<option value="${i + 1}" selected>${disciplina[i].name}</option>`;
-				else options += `<option value="${i + 1}">${disciplina[i].name}</option>`;
+				if (disciplina[i].name != undefined) {
+					if (inscricao[id - 1].id_subject == disciplina[i].id) options += `<option value="${i + 1}" selected>${disciplina[i].name}</option>`;
+					else options += `<option value="${i + 1}">${disciplina[i].name}</option>`;
+				}
 			}
 			html.getElementById("disciplina").innerHTML += options;
 			options = '<option selected disabled></option>';
 			for(var i = 0; i < aluno.length; i++) {
-				if (inscricao[id - 1].id_student == aluno[i].id) options += `<option value="${i + 1}" selected>${aluno[i].name}</option>`;
-				else options += `<option value="${i + 1}">${aluno[i].name}</option>`;
+				if (aluno[i].name != undefined) {
+					if (inscricao[id - 1].id_student == aluno[i].id) options += `<option value="${i + 1}" selected>${aluno[i].name}</option>`;
+					else options += `<option value="${i + 1}">${aluno[i].name}</option>`;
+				}
 			}
 			html.getElementById("aluno").innerHTML += options;
             break;
