@@ -101,8 +101,8 @@ INSERT INTO Inscricao (IDDisciplina, IDAluno, Nota) VALUES
 (5, 10, 19.01);
 
 INSERT INTO Revisao (Dia_Revisao, IDDisciplina, IDAluno, Nota_Antes, Nota_Depois, Efetivada, Fechada) VALUES
-('2035-03-21', 2, 3, 6.91, 11.56, 'S', 'N'),
+('2023-03-21', 2, 3, 6.91, 11.56, 'S', 'N'),
 ('2022-05-11', 5, 7, 8.89, 16.26, 'N', 'N'),
 (CURRENT_DATE, 3, 5, 2.08, 10.08, 'S', 'S'),
-('2008-08-27', 4, 10, 5.50, 14.85, 'S', 'N'),
-('2014-12-07', 1, 9, 10.87, 12.04, 'S', 'S');
+('2022-08-27', 4, 10, 5.50, 14.85, 'S', 'N'),
+('2020-12-07', 1, 9, 10.87, 12.04, 'S', 'S');
